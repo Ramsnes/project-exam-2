@@ -1,11 +1,14 @@
+// App.js
+import React from "react";
+import { Routing } from "./routes/Routes";
+import { ResponsiveBar } from "./navbar/Navbar";
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>H1</h1>
-        <p>Test</p>
-      </header>
-    </div>
+    <>
+      <ResponsiveBar />
+      <Routing />
+    </>
   );
 }
 
