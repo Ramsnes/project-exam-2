@@ -1,7 +1,7 @@
-import React from "react";
+// import React from "react";
 
-function RouteNotFound() {
-  return <div>Page not found</div>;
-}
+// function RouteNotFound() {
+//   return <div>Page not found</div>;
+// }
 
-export default RouteNotFound;
+// export default RouteNotFound;
