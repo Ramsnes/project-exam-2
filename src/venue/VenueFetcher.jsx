@@ -10,8 +10,11 @@ export function VenueFetcher() {
     error,
   } = useFetcher("https://v2.api.noroff.dev/holidaze/venues");
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading) return <div className="loader"></div>;
+  if (error) return <div className="error">Error: {error}</div>;
 
-  return <VenueList venues={venues} />; // List + venues
+  // Render first 9 venues
+  const limitedVenues = venues.slice(0, 9);
+
+  return <VenueList venues={limitedVenues} />; // List wrapping 9 venues
 }
