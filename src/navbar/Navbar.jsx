@@ -47,7 +47,7 @@ export function ResponsiveBar() {
             variant="h6"
             noWrap
             component="a"
-            href="/src/index.js"
+            href="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -102,7 +102,7 @@ export function ResponsiveBar() {
             variant="h5"
             noWrap
             component="a"
-            href="/src/index.js"
+            href="/"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },

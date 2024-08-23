@@ -1,13 +1,13 @@
 // App.js
 import React from "react";
 import { ResponsiveBar } from "./navbar/Navbar";
-import { VenueFetcher } from "./venue/VenueFetcher";
+import { Routing } from "./routes/Routing";
 
 function App() {
   return (
     <>
       <ResponsiveBar />
-      <VenueFetcher />
+      <Routing />
     </>
   );
 }
