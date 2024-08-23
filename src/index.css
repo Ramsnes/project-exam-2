@@ -70,3 +70,10 @@ header {
   flex-direction: column;
 }
 /* Buttons  end*/
+
+/* Search bar  */
+#search-bar {
+  display: flex;
+  justify-content: center;
+}
+/* Search bar end */

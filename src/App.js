@@ -1,14 +1,15 @@
 // App.js
 import React from "react";
-import { ResponsiveBar } from "./navbar/Navbar";
+import { Navbar } from "./navbar/Navbar";
 import { Routing } from "./routes/Routing";
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
   return (
-    <>
-      <ResponsiveBar />
+    <BrowserRouter>
+      <Navbar />
       <Routing />
-    </>
+    </BrowserRouter>
   );
 }
 

@@ -11,6 +11,7 @@ import {
   Container,
   Grid,
 } from "@mui/material";
+import { SearchBar } from "../search/Search";
 
 /* venues prop is given default value of empty array (venues = []). This ensures that venues is always an array and won’t throw an error. */
 export function VenueList({ venues = [] }) {
@@ -18,18 +19,13 @@ export function VenueList({ venues = [] }) {
 
   // Error msg
   if (!venues || venues.length === 0) {
-    return (
-      <>
-        <NoVenuesMsg />;
-      </>
-    );
+    return <NoVenuesMsg />;
   }
 
   // Venue list render
   return (
     <Container maxWidth="md" style={{ marginTop: "2rem" }}>
-      <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-        {/* Btn  */}
+      {/* <div style={{ textAlign: "center", marginBottom: "2rem" }}>
         <Button
           onClick={() => navigate("/venues")}
           variant="contained"
@@ -38,11 +34,21 @@ export function VenueList({ venues = [] }) {
         >
           All Venues
         </Button>
-      </div>
+      </div> */}
 
       <Typography variant="h4" align="center" gutterBottom>
         Featured Venues
       </Typography>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: "2rem",
+        }}
+      >
+        <SearchBar />
+      </div>
 
       {/* Featured venues cards */}
       <Grid container spacing={4}>
@@ -58,6 +64,7 @@ export function VenueList({ venues = [] }) {
 
           return (
             <Grid item key={venue.id} xs={12} sm={6} md={4}>
+              {/* CardActionArea?  */}
               <Card
                 sx={{
                   height: "100%",

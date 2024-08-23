@@ -18,7 +18,7 @@ import AdbIcon from "@mui/icons-material/Adb";
 const pages = ["Home", "Venues", "Profile", "Contact"];
 const settings = ["Login", "Logout"];
 
-export function ResponsiveBar() {
+export function Navbar() {
   // useState() for open/close menu
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
