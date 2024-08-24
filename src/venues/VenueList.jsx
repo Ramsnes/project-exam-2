@@ -1,6 +1,6 @@
 // VenueList.jsx
 import React from "react";
-// import { Button } from "@mui/material";
+import { PlaceholderImg } from "../error/PlaceholderImg";
 import { NoVenuesMsg } from "../error/NoVenuesMsg";
 import {
   Card,
@@ -45,9 +45,7 @@ export function VenueList({ venues = [] }) {
         {venues.map((venue) => {
           // If img missing, placeholder
           const imageUrl =
-            venue.media.length > 0
-              ? venue.media[0].url
-              : "https://via.placeholder.com/140";
+            venue.media.length > 0 ? venue.media[0].url : PlaceholderImg();
           // If data present, show img, else venue name
           const imageAlt =
             venue.media.length > 0 ? venue.media[0].alt : venue.name;

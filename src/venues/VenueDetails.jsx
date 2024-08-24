@@ -1,6 +1,18 @@
 // VenueDetails.jsx
 import React from "react";
+import { PlaceholderImg } from "../error/PlaceholderImg";
+import WifiIcon from "@mui/icons-material/Wifi";
+import LocalParkingIcon from "@mui/icons-material/LocalParking";
+import RestaurantIcon from "@mui/icons-material/Restaurant";
+import PetsIcon from "@mui/icons-material/Pets";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import StarIcon from "@mui/icons-material/Star";
+import SignpostIcon from "@mui/icons-material/Signpost";
+import LocationCityIcon from "@mui/icons-material/LocationCity";
+import LanguageIcon from "@mui/icons-material/Language";
 import {
+  Box,
   Typography,
   Container,
   Card,
@@ -14,11 +26,17 @@ export function VenueDetails({ venue }) {
   const imageUrl =
     venue.media && venue.media.length > 0
       ? venue.media[0].url
-      : "https://via.placeholder.com/300";
+      : PlaceholderImg();
+
+  // Fn to display boolean as "Yes" or "No"
+  const formatBoolean = (value) => (value ? "Yes" : "No");
 
   return (
+    // Main container
     <Container maxWidth="md" sx={{ marginTop: 4 }}>
-      <Card>
+      {/* Main card container  */}
+      <Card variant="outlined">
+        {/* Displays image */}
         <CardMedia
           component="img"
           height="300"
@@ -29,38 +47,134 @@ export function VenueDetails({ venue }) {
               : venue.name
           }
         />
-        {/* Name / description */}
+        {/* Displays image end */}
+        {/* Card content */}
         <CardContent>
-          <Typography variant="h4" gutterBottom>
+          {/* Venue Name and Description */}
+          <Typography variant="h3" gutterBottom>
             {venue.name}
           </Typography>
-          <Typography variant="body1" paragraph>
-            {" "}
+          <Typography variant="body1" paragraph sx={{ mb: 3 }}>
             {venue.description}
           </Typography>
 
-          <Grid container spacing={2}>
-            {/* Price */}
-            <Grid item xs={12} md={6}>
-              <Typography variant="body2" gutterBottom>
-                <strong>Price:</strong> ${venue.price}
-              </Typography>
+          {/* Venue Information */}
+          <Box sx={{ mb: 3 }}>
+            <Typography variant="h5" gutterBottom>
+              Venue Information
+            </Typography>
+            <Grid container spacing={2}>
+              {/* Price */}
+              <Grid item xs={12} sm={6} md={4}>
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <AttachMoneyIcon sx={{ mr: 1 }} />
+                  <Typography variant="body2" gutterBottom>
+                    <strong>Price:</strong> ${venue.price}
+                  </Typography>
+                </Box>
+              </Grid>
+              {/* Max Guests */}
+              <Grid item xs={12} sm={6} md={4}>
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <PeopleAltIcon sx={{ mr: 1 }} />
+                  <Typography variant="body2" gutterBottom>
+                    <strong>Max Guests:</strong> {venue.maxGuests}
+                  </Typography>
+                </Box>
+              </Grid>
+              {/* Rating */}
+              <Grid item xs={12} sm={6} md={4}>
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <StarIcon sx={{ mr: 1 }} />
+                  <Typography variant="body2" gutterBottom>
+                    <strong>Rating:</strong> {venue.rating} / 5
+                  </Typography>
+                </Box>
+              </Grid>
             </Grid>
-            {/* Max guests  */}
-            <Grid item xs={12} md={6}>
-              <Typography variant="body2" gutterBottom>
-                <strong>Max guests:</strong> ${venue.maxGuests}
-              </Typography>
+          </Box>
+
+          {/* Location Information */}
+          <Box sx={{ mb: 3 }}>
+            <Typography variant="h5" gutterBottom>
+              Location Information
+            </Typography>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6} md={4}>
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <SignpostIcon sx={{ mr: 1 }} />
+                  <Typography variant="body2" gutterBottom>
+                    <strong>Address:</strong> {venue.location.address}
+                  </Typography>
+                </Box>
+              </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <LocationCityIcon sx={{ mr: 1 }} />
+                  <Typography variant="body2" gutterBottom>
+                    <strong>City:</strong> {venue.location.city}
+                  </Typography>
+                </Box>
+              </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <LanguageIcon sx={{ mr: 1 }} />
+                  <Typography variant="body2" gutterBottom>
+                    <strong>Country:</strong> {venue.location.country}
+                  </Typography>
+                </Box>
+              </Grid>
             </Grid>
-            {/* Rating  */}
-            <Grid item xs={12} md={6}>
-              <Typography variant="body2" gutterBottom>
-                <strong>Rating:</strong> {venue.rating} / 5
-              </Typography>
+          </Box>
+
+          {/* Other Information */}
+          <Box sx={{ mb: 3 }}>
+            <Typography variant="h5" gutterBottom>
+              Other Information
+            </Typography>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6} md={4}>
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <WifiIcon sx={{ mr: 1 }} />
+                  <Typography variant="body2" gutterBottom>
+                    <strong>Wifi:</strong> {formatBoolean(venue.meta.wifi)}
+                  </Typography>
+                </Box>
+              </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <LocalParkingIcon sx={{ mr: 1 }} />
+                  <Typography variant="body2" gutterBottom>
+                    <strong>Parking:</strong>{" "}
+                    {formatBoolean(venue.meta.parking)}
+                  </Typography>
+                </Box>
+              </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <RestaurantIcon sx={{ mr: 1 }} />
+                  <Typography variant="body2" gutterBottom>
+                    <strong>Restaurant:</strong>{" "}
+                    {formatBoolean(venue.meta.restaurant)}
+                  </Typography>
+                </Box>
+              </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <PetsIcon sx={{ mr: 1 }} />
+                  <Typography variant="body2" gutterBottom>
+                    <strong>Pets Allowed:</strong>{" "}
+                    {formatBoolean(venue.meta.pets)}
+                  </Typography>
+                </Box>
+              </Grid>
             </Grid>
-          </Grid>
+          </Box>
+          {/* Card content end */}
         </CardContent>
+        {/* Main card container end */}
       </Card>
+      {/* Main container end */}
     </Container>
   );
 }
