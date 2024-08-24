@@ -1,7 +1,6 @@
 // VenueList.jsx
 import React from "react";
-import { Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+// import { Button } from "@mui/material";
 import { NoVenuesMsg } from "../error/NoVenuesMsg";
 import {
   Card,
@@ -12,10 +11,12 @@ import {
   Grid,
 } from "@mui/material";
 import { SearchBar } from "../search/Search";
+import { CardActionArea } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 /* venues prop is given default value of empty array (venues = []). This ensures that venues is always an array and won’t throw an error. */
 export function VenueList({ venues = [] }) {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Initialize useNavigate
 
   // Error msg
   if (!venues || venues.length === 0) {
@@ -25,17 +26,6 @@ export function VenueList({ venues = [] }) {
   // Venue list render
   return (
     <Container maxWidth="md" style={{ marginTop: "2rem" }}>
-      {/* <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-        <Button
-          onClick={() => navigate("/venues")}
-          variant="contained"
-          color="primary"
-          sx={{ bgcolor: "orange", color: "black" }}
-        >
-          All Venues
-        </Button>
-      </div> */}
-
       <Typography variant="h4" align="center" gutterBottom>
         Featured Venues
       </Typography>
@@ -50,7 +40,7 @@ export function VenueList({ venues = [] }) {
         <SearchBar />
       </div>
 
-      {/* Featured venues cards */}
+      {/* Mapping  */}
       <Grid container spacing={4}>
         {venues.map((venue) => {
           // If img missing, placeholder
@@ -64,7 +54,6 @@ export function VenueList({ venues = [] }) {
 
           return (
             <Grid item key={venue.id} xs={12} sm={6} md={4}>
-              {/* CardActionArea?  */}
               <Card
                 sx={{
                   height: "100%",
@@ -74,17 +63,20 @@ export function VenueList({ venues = [] }) {
                   alignItems: "center",
                 }}
               >
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image={imageUrl}
-                  alt={imageAlt || venue.name}
-                />
-                <CardContent>
-                  <Typography variant="h6" align="center">
-                    {venue.name}
-                  </Typography>
-                </CardContent>
+                {/* Card click nav to id page  */}
+                <CardActionArea onClick={() => navigate(`/venue/${venue.id}`)}>
+                  <CardMedia
+                    component="img"
+                    height="140"
+                    image={imageUrl}
+                    alt={imageAlt || venue.name}
+                  />
+                  <CardContent>
+                    <Typography variant="h6" align="center">
+                      {venue.name}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
               </Card>
             </Grid>
           );

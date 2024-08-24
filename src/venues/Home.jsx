@@ -1,4 +1,4 @@
-// VenueFetcher.jsx
+// Home (landing page).jsx
 import React from "react";
 import { useFetcher } from "../hooks/useFetcher";
 import { VenueList } from "./VenueList";
