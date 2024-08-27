@@ -14,9 +14,10 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import { Link } from "react-router-dom";
 
 const pages = ["Home", "Venues", "Profile", "Contact"];
-const settings = ["Login", "Logout"];
+const settings = ["Register", "Login", "Logout"];
 
 export function Navbar() {
   // useState() for open/close menu
@@ -90,13 +91,22 @@ export function Navbar() {
                 display: { xs: "block", md: "none" },
               }}
             >
+              {/* Mobile nav links: map over the 'pages' array to dynamically create buttons for navigations */}
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography textAlign="center">
+                    <Link
+                      to={`/${page.toLowerCase()}`}
+                      style={{ color: "inherit", textDecoration: "none" }}
+                    >
+                      {page}
+                    </Link>
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
+
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
@@ -116,14 +126,21 @@ export function Navbar() {
           >
             Holidaze
           </Typography>
+
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            {/* Desktop nav links: map over the 'pages' array to dynamically create buttons for navigations */}
             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                {page}
+                <Link
+                  to={`/${page.toLowerCase()}`}
+                  style={{ color: "inherit", textDecoration: "none" }}
+                >
+                  {page}
+                </Link>
               </Button>
             ))}
           </Box>
@@ -150,8 +167,14 @@ export function Navbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
+              {/* map over the 'settings' array to create menu items (register, Login, Logout) */}
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem
+                  key={setting}
+                  onClick={handleCloseUserMenu}
+                  component={Link}
+                  to={`/${setting.toLowerCase()}`}
+                >
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
