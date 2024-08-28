@@ -42,20 +42,25 @@ export function RegisterForm({ onSubmit }) {
       <form onSubmit={handleSubmit(handleFormSubmit)} noValidate>
         {" "}
         <Grid container spacing={2}>
-          {/* Username */}
+          {/* Username - required */}
           <Grid item xs={12}>
             <TextField
               fullWidth
-              label="Username"
+              label="Username (required)"
               {...register("name", {
-                required: "This field is required",
-                minLength: {
-                  value: 5,
-                  message: "Minimum lengt is 5 characters",
-                },
-                maxLength: {
-                  value: 12,
-                  message: "Maximum length is 12 characters",
+                validate: {
+                  valid: (value) => {
+                    if (!value) {
+                      return "This field is required";
+                    }
+                    if (value.length < 5) {
+                      return "Minimum length is 5 characters";
+                    }
+                    if (value.length > 12) {
+                      return "Maximum length is 12 characters";
+                    }
+                    return true;
+                  },
                 },
               })}
               error={!!errors.name}
@@ -63,11 +68,11 @@ export function RegisterForm({ onSubmit }) {
             />
           </Grid>
 
-          {/* Email */}
+          {/* Email - required */}
           <Grid item xs={12}>
             <TextField
               fullWidth
-              label="Email"
+              label="Email (required)"
               {...register("email", {
                 validate: {
                   valid: (value) => {
@@ -86,21 +91,26 @@ export function RegisterForm({ onSubmit }) {
             />
           </Grid>
 
-          {/* Password */}
+          {/* Password - required */}
           <Grid item xs={12}>
             <TextField
               fullWidth
-              label="Password"
+              label="Password (required)"
               type="password"
               {...register("password", {
-                required: "This field is required",
-                minLength: {
-                  value: 8,
-                  message: "Minimum length is 8 characters",
-                },
-                maxLength: {
-                  value: 100,
-                  message: "Maximum length is 100 characters",
+                validate: {
+                  valid: (value) => {
+                    if (!value) {
+                      return "This field is required";
+                    }
+                    if (value.length < 8) {
+                      return "Minimum length is 8 characters";
+                    }
+                    if (value.length > 20) {
+                      return "Maximum length is 20 characters";
+                    }
+                    return true;
+                  },
                 },
               })}
               error={!!errors.password}
@@ -108,11 +118,11 @@ export function RegisterForm({ onSubmit }) {
             />
           </Grid>
 
-          {/* Bio */}
+          {/* Bio - optional */}
           <Grid item xs={12}>
             <TextField
               fullWidth
-              label="Bio"
+              label="Bio (optional)"
               multiline
               rows={4}
               {...register("bio", {
@@ -127,22 +137,33 @@ export function RegisterForm({ onSubmit }) {
             />
           </Grid>
 
-          {/* Avatar URL */}
+          {/* Avatar URL - optional */}
+          {/* Create placeholder avatar?  */}
           <Grid item xs={12}>
             <TextField
               fullWidth
-              label="Avatar URL"
+              label="Avatar URL (optional)"
               type="url"
-              {...register("avatar.url")}
+              {...register("avatar.url", {
+                validate: {
+                  valid: (value) => {
+                    if (value && !value.startsWith("http://")) {
+                      return "Please include 'https://' at the base of URL";
+                    }
+                  },
+                },
+              })}
               placeholder="https://example.com/avatar.jpg"
+              error={!!errors.avatar?.url}
+              helperText={errors.avatar?.url?.message}
             />
           </Grid>
 
-          {/* Avatar alt text */}
+          {/* Avatar alt text - optional */}
           <Grid item xs={12}>
             <TextField
               fullWidth
-              label="Avatar Alt Text"
+              label="Avatar Alt Text (optional)"
               {...register("avatar.alt", {
                 maxLength: {
                   value: 100,
@@ -155,14 +176,24 @@ export function RegisterForm({ onSubmit }) {
             />
           </Grid>
 
-          {/* Banner URL */}
+          {/* Banner URL - optional*/}
           <Grid item xs={12}>
             <TextField
               fullWidth
-              label="Banner URL"
+              label="Banner URL (optional)"
               type="url"
-              {...register("banner.url")}
+              {...register("banner.url", {
+                validate: {
+                  valid: (value) => {
+                    if (value && !value.startsWith("https://")) {
+                      return "Please include 'https://' at the base of URL";
+                    }
+                  },
+                },
+              })}
               placeholder="https://example.com/banner.jpg"
+              error={!!errors.banner?.url}
+              helperText={errors.banner?.url?.message}
             />
           </Grid>
 
