@@ -20,12 +20,27 @@ export function RegisterForm({ onSubmit }) {
     formState: { errors },
   } = useForm();
 
+  // Logs data sent
+  const handleFormSubmit = (data) => {
+    console.log("Data being submitted:", data);
+    onSubmit(data);
+  };
+
   return (
-    <Box component="div" sx={{ maxWidth: 500, mx: "auto", mt: 4 }}>
-      <Typography variant="h4" component="h1" gutterBottom>
+    <Box
+      component="div"
+      sx={{ maxWidth: 500, mx: "auto", mt: 4, padding: "0 20px" }}
+    >
+      <Typography
+        variant="h4"
+        component="h1"
+        gutterBottom
+        sx={{ display: "flex", justifyContent: "center" }}
+      >
         Register
       </Typography>
-      <form onSubmit={handleSubmit(onSubmit)} noValidate>
+      <form onSubmit={handleSubmit(handleFormSubmit)} noValidate>
+        {" "}
         <Grid container spacing={2}>
           {/* Username */}
           <Grid item xs={12}>

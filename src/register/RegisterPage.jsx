@@ -36,7 +36,6 @@ export function RegisterPage() {
 
   return (
     <div>
-      <h1 className="register-h1">Register form</h1>
       <RegisterForm onSubmit={handleRegisterSubmit} />
       {loading && <Loader />}
     </div>
