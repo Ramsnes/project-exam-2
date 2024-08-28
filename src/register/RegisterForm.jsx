@@ -21,9 +21,27 @@ export function RegisterForm({ onSubmit }) {
   } = useForm();
 
   // Logs data sent
+  // Ensures avatar/banner fields aren't sent if empty, and alt fields aren't sent if respective URL-fields are empty when alt fields are filled
   const handleFormSubmit = (data) => {
-    console.log("Data being submitted:", data);
-    onSubmit(data);
+    // Creates a new object to store the cleaned form data
+    const cleanedData = { ...data };
+
+    // Handle avatar field
+    if (!cleanedData.avatar?.url) {
+      delete cleanedData.avatar; // Remove the avatar field entirely if the url is empty
+    } else if (!cleanedData.avatar.alt) {
+      delete cleanedData.avatar.alt; // Remove alt if only url is provided
+    }
+
+    // Handle banner field
+    if (!cleanedData.banner?.url) {
+      delete cleanedData.banner; // Remove the banner field entirely if the url is empty
+    } else if (!cleanedData.banner.alt) {
+      delete cleanedData.banner.alt; // Remove alt if only url is provided
+    }
+
+    console.log("Data being submitted:", cleanedData);
+    onSubmit(cleanedData);
   };
 
   return (
@@ -147,9 +165,10 @@ export function RegisterForm({ onSubmit }) {
               {...register("avatar.url", {
                 validate: {
                   valid: (value) => {
-                    if (value && !value.startsWith("http://")) {
+                    if (value && !value.startsWith("https://")) {
                       return "Please include 'https://' at the base of URL";
                     }
+                    return true;
                   },
                 },
               })}
@@ -197,11 +216,11 @@ export function RegisterForm({ onSubmit }) {
             />
           </Grid>
 
-          {/* Banner alt text */}
+          {/* Banner alt text - Optional*/}
           <Grid item xs={12}>
             <TextField
               fullWidth
-              label="Banner Alt Text"
+              label="Banner Alt Text (optional)"
               {...register("banner.alt", {
                 maxLength: {
                   value: 100,
