@@ -5,7 +5,7 @@ import { VenueList } from "./VenueList";
 import { Loader } from "../loader/Loader";
 import { ErrorMsg } from "../error/ErrorMsg";
 
-export function VenueFetcher() {
+export function Home() {
   const {
     data: venues,
     loading,

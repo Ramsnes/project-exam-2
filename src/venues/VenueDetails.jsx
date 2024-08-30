@@ -19,9 +19,14 @@ import {
   CardMedia,
   CardContent,
   Grid,
+  Button,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export function VenueDetails({ venue }) {
+  // Navigation hook
+  const navigate = useNavigate();
+
   // If img, get URL. If no img, placeholder
   const imageUrl =
     venue.media && venue.media.length > 0
@@ -33,7 +38,7 @@ export function VenueDetails({ venue }) {
 
   return (
     // Main container
-    <Container maxWidth="md" sx={{ marginTop: 4 }}>
+    <Container maxWidth="md" className="container">
       {/* Main card container  */}
       <Card variant="outlined">
         {/* Displays image */}
@@ -170,6 +175,15 @@ export function VenueDetails({ venue }) {
               </Grid>
             </Grid>
           </Box>
+
+          {/* Back button */}
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => navigate("/home")}
+          >
+            Back to home
+          </Button>
           {/* Card content end */}
         </CardContent>
         {/* Main card container end */}

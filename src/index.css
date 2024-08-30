@@ -10,6 +10,10 @@ header {
   background-color: black !important;
 }
 
+.container {
+  margin: 2rem 0;
+}
+
 /* Errors and loadings  */
 .noVenues,
 .error {

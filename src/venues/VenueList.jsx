@@ -25,9 +25,9 @@ export function VenueList({ venues = [] }) {
 
   // Venue list render
   return (
-    <Container maxWidth="md" style={{ marginTop: "2rem" }}>
+    <Container maxWidth="md" className="container">
       <Typography variant="h4" align="center" gutterBottom>
-        Featured Venues
+        Featured venues
       </Typography>
 
       <div

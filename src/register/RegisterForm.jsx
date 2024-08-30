@@ -47,7 +47,7 @@ export function RegisterForm({ onSubmit }) {
   return (
     <Box
       component="div"
-      sx={{ maxWidth: 500, mx: "auto", mt: 4, padding: "0 20px" }}
+      sx={{ maxWidth: 500, mx: "auto", mt: 4, mb: 4, padding: "0 20px" }}
     >
       <Typography
         variant="h4"

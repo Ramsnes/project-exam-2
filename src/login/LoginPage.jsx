@@ -23,9 +23,9 @@ export function LoginPage() {
       });
 
       if (result.ok) {
-        navigate("/");
+        navigate("/home");
       } else {
-        alert("Invalid email og password");
+        alert("Invalid email or password");
       }
     } catch (error) {
       alert("An error ocurred");

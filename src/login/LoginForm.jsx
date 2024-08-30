@@ -36,7 +36,7 @@ export function LoginForm({ onSubmit }) {
       <form onSubmit={handleSubmit(handleFormSubmit)} noValidate>
         <Grid container spacing={2}>
           {/* Email - required */}
-          <Grid item={12}>
+          <Grid item xs={12}>
             <TextField
               fullWidth
               label="Email (required)"
@@ -83,7 +83,7 @@ export function LoginForm({ onSubmit }) {
           </Grid>
 
           {/* Submit button */}
-          <Grid item sx={12}>
+          <Grid item xs={12}>
             <Button fullWidth type="submit" variant="contained" color="primary">
               Login
             </Button>
