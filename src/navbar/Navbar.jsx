@@ -14,14 +14,15 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
+import { useAuth } from "../AuthenticationProvider";
 
 const pages = ["Home", "Venues", "Profile", "Contact"];
-const settings = ["Register", "Login", "Logout"];
 
 export function Navbar() {
   // useState() for open/close menu
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const { user, logOut } = useAuth();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -37,6 +38,8 @@ export function Navbar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const settings = user ? ["Logout", "Register"] : ["Register", "Login"];
 
   return (
     <AppBar position="static">
@@ -168,9 +171,18 @@ export function Navbar() {
               {settings.map((setting) => (
                 <MenuItem
                   key={setting}
-                  onClick={handleCloseUserMenu}
+                  onClick={() => {
+                    if (setting === "Logout") {
+                      logOut();
+                      handleCloseUserMenu();
+                    }
+                  }}
                   component={Link}
-                  to={`/${setting.toLowerCase()}`}
+                  to={
+                    setting === "Logout"
+                      ? undefined
+                      : `/${setting.toLowerCase()}`
+                  }
                 >
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>

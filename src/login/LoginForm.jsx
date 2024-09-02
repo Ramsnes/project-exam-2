@@ -40,7 +40,7 @@ export function LoginForm({ onSubmit }) {
             <TextField
               fullWidth
               label="Email (required)"
-              {...register("email,", {
+              {...register("email", {
                 validate: {
                   valid: (value) => {
                     if (!value) {

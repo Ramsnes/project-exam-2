@@ -3,18 +3,20 @@ import React, { useState } from "react";
 import { LoginForm } from "./LoginForm";
 import { Loader } from "../loader/Loader";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../AuthenticationProvider";
 
 const baseUrl = "https://v2.api.noroff.dev";
 
 export function LoginPage() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { setUser } = useAuth();
 
   const handleLoginSubmit = async (data) => {
     setLoading(true);
 
     try {
-      const result = await fetch(`${baseUrl}/auth/login`, {
+      const result = await fetch(`${baseUrl}/auth/login?_holidaze=true`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -23,6 +25,9 @@ export function LoginPage() {
       });
 
       if (result.ok) {
+        const json = await result.json();
+
+        setUser(json.data);
         navigate("/home");
       } else {
         alert("Invalid email or password");

@@ -15,7 +15,7 @@ export function ProfilePage() {
       <Typography variant="h4" component="h1" gutterBottom>
         Your Profile
       </Typography>
-      {/* Add profile details here as needed */}
+      {/* Add profile details here */}
       <Button
         variant="contained"
         color="primary"

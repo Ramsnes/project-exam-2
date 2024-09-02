@@ -63,8 +63,9 @@ export function RegisterForm({ onSubmit }) {
           {/* Username - required */}
           <Grid item xs={12}>
             <TextField
+              required
               fullWidth
-              label="Username (required)"
+              label="Username"
               {...register("name", {
                 validate: {
                   valid: (value) => {
@@ -90,7 +91,8 @@ export function RegisterForm({ onSubmit }) {
           <Grid item xs={12}>
             <TextField
               fullWidth
-              label="Email (required)"
+              required
+              label="Email"
               {...register("email", {
                 validate: {
                   valid: (value) => {
@@ -112,8 +114,9 @@ export function RegisterForm({ onSubmit }) {
           {/* Password - required */}
           <Grid item xs={12}>
             <TextField
+              required
               fullWidth
-              label="Password (required)"
+              label="Password"
               type="password"
               {...register("password", {
                 validate: {
