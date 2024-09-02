@@ -44,9 +44,17 @@ export function CreateVenueForm({ onSubmit }) {
         <Grid container spacing={2}>
           {/* Venue name - required */}
           <Grid item xs={12}>
+            <Typography
+              variant="h6"
+              component="h2"
+              gutterBottom
+              sx={{ display: "flex", justifyContent: "start" }}
+            >
+              Required fields
+            </Typography>
             <TextField
               fullWidth
-              label="Venue name (required)"
+              label="Venue name"
               {...register("name", {
                 required: "This field is required",
               })}
@@ -59,7 +67,7 @@ export function CreateVenueForm({ onSubmit }) {
           <Grid item xs={12}>
             <TextField
               fullWidth
-              label="Description (required)"
+              label="Description"
               multiline
               rows={4}
               {...register("description", {
@@ -70,40 +78,11 @@ export function CreateVenueForm({ onSubmit }) {
             />
           </Grid>
 
-          {/* Media URL - optional */}
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label="Media URL (optional)"
-              {...register("media[0].url", {
-                pattern: {
-                  value: /^https?:\/\/.+/,
-                  message: "Enter a valid URL",
-                },
-              })}
-              placeholder="https://example.com/image.jpg"
-              error={!!errors.media?.[0]?.url}
-              helperText={errors.media?.[0]?.url?.message}
-            />
-          </Grid>
-
-          {/* Media Alt Text - optional */}
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label="Media Alt Text (optional)"
-              {...register("media[0].alt")}
-              placeholder="Image description"
-              error={!!errors.media?.[0]?.alt}
-              helperText={errors.media?.[0]?.alt?.message}
-            />
-          </Grid>
-
           {/* Price - required */}
           <Grid item xs={12}>
             <TextField
               fullWidth
-              label="Price per night (required)"
+              label="Price per night"
               type="number"
               {...register("price", {
                 required: "This field is required",
@@ -121,7 +100,7 @@ export function CreateVenueForm({ onSubmit }) {
           <Grid item xs={12}>
             <TextField
               fullWidth
-              label="Max Guests (required)"
+              label="Max Guests"
               type="number"
               {...register("maxGuests", {
                 required: "This field is required",
@@ -135,36 +114,53 @@ export function CreateVenueForm({ onSubmit }) {
             />
           </Grid>
 
-          {/* Meta Fields */}
-          <Grid item xs={12}>
-            <FormControlLabel
-              control={<Checkbox {...register("meta.wifi")} />}
-              label="WiFi"
-            />
-            <FormControlLabel
-              control={<Checkbox {...register("meta.parking")} />}
-              label="Parking"
-            />
-            <FormControlLabel
-              control={<Checkbox {...register("meta.breakfast")} />}
-              label="Breakfast"
-            />
-            <FormControlLabel
-              control={<Checkbox {...register("meta.pets")} />}
-              label="Pets allowed"
-            />
-          </Grid>
-
-          {/* Location Fields */}
+          {/* Media URL - optional */}
           <Grid item xs={12}>
             <Typography
               variant="h6"
               component="h2"
               gutterBottom
-              sx={{ display: "flex", justifyContent: "center" }}
+              sx={{ display: "flex", justifyContent: "start" }}
+            >
+              Optional fields
+            </Typography>
+            <TextField
+              fullWidth
+              label="Media URL"
+              {...register("media[0].url", {
+                pattern: {
+                  value: /^https?:\/\/.+/,
+                  message: "Enter a valid URL",
+                },
+              })}
+              placeholder="https://example.com/image.jpg"
+              error={!!errors.media?.[0]?.url}
+              helperText={errors.media?.[0]?.url?.message}
+            />
+          </Grid>
+
+          {/* Media Alt Text - optional */}
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Media URL description"
+              {...register("media[0].alt")}
+              placeholder="Image description"
+              error={!!errors.media?.[0]?.alt}
+              helperText={errors.media?.[0]?.alt?.message}
+            />
+          </Grid>
+
+          {/* Location Fields */}
+          <Grid item xs={12}>
+            {/* <Typography
+              variant="h6"
+              component="h2"
+              gutterBottom
+              sx={{ display: "flex", justifyContent: "start" }}
             >
               Location details (optional)
-            </Typography>
+            </Typography> */}
             <TextField
               fullWidth
               label="Address"
@@ -224,6 +220,26 @@ export function CreateVenueForm({ onSubmit }) {
                 valueAsNumber: true,
               })}
               placeholder="Longitude"
+            />
+          </Grid>
+
+          {/* Meta Fields */}
+          <Grid item xs={12}>
+            <FormControlLabel
+              control={<Checkbox {...register("meta.wifi")} />}
+              label="WiFi"
+            />
+            <FormControlLabel
+              control={<Checkbox {...register("meta.parking")} />}
+              label="Parking"
+            />
+            <FormControlLabel
+              control={<Checkbox {...register("meta.breakfast")} />}
+              label="Breakfast"
+            />
+            <FormControlLabel
+              control={<Checkbox {...register("meta.pets")} />}
+              label="Pets allowed"
             />
           </Grid>
 

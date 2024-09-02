@@ -8,6 +8,8 @@ import { LoginPage } from "../login/LoginPage";
 import { ProfilePage } from "../profile/ProfilePage";
 import { CreateVenuePage } from "../createVenue/CreateVenuePage";
 import { ContactPage } from "../contact/Contact";
+import { BookingsForm } from "../bookings/BookingsForm";
+import { MyVenuesForm } from "../venues/MyVenuesForm";
 
 export function Routing() {
   return (
@@ -19,6 +21,8 @@ export function Routing() {
       <Route path="/profile" element={<ProfilePage />} />
       <Route path="/create-venue" element={<CreateVenuePage />} />
       <Route path="/contact" element={<ContactPage />} />
+      <Route path="/my-bookings" element={<BookingsForm />} />
+      <Route path="/my-venues" element={<MyVenuesForm />} />
     </Routes>
   );
 }

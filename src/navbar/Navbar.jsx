@@ -39,7 +39,9 @@ export function Navbar() {
     setAnchorElUser(null);
   };
 
-  const settings = user ? ["Logout", "Register"] : ["Register", "Login"];
+  const settings = user
+    ? ["My bookings", "My venues", "Create venue", "Logout", "Register"]
+    : ["Register", "Login"];
 
   return (
     <AppBar position="static">
@@ -146,7 +148,7 @@ export function Navbar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Manage login/logout">
+            <Tooltip title="Options menu">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
@@ -181,7 +183,7 @@ export function Navbar() {
                   to={
                     setting === "Logout"
                       ? undefined
-                      : `/${setting.toLowerCase()}`
+                      : `/${setting.toLowerCase().replace(" ", "-")}`
                   }
                 >
                   <Typography textAlign="center">{setting}</Typography>

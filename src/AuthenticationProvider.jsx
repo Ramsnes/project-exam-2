@@ -1,3 +1,4 @@
+// AuthenticationProvider.jsx
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 // Summary:
