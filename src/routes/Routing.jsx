@@ -10,6 +10,7 @@ import { CreateVenuePage } from "../createVenue/CreateVenuePage";
 import { ContactPage } from "../contact/Contact";
 import { BookingsForm } from "../bookings/BookingsForm";
 import { MyVenuesForm } from "../venues/MyVenuesForm";
+import { UpdateProfile } from "../profile/UpdateProfile";
 
 export function Routing() {
   return (
@@ -23,6 +24,7 @@ export function Routing() {
       <Route path="/contact" element={<ContactPage />} />
       <Route path="/my-bookings" element={<BookingsForm />} />
       <Route path="/my-venues" element={<MyVenuesForm />} />
+      <Route path="/update-profile" element={<UpdateProfile />} />
     </Routes>
   );
 }

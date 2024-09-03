@@ -16,7 +16,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
 import { useAuth } from "../AuthenticationProvider";
 
-const pages = ["Home", "Venues", "Profile", "Contact"];
+const pages = ["Home", "Venues(tom)", "Profile", "Contact"];
 
 export function Navbar() {
   // useState() for open/close menu

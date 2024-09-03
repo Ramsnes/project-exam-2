@@ -12,15 +12,15 @@ import {
 } from "@mui/material";
 
 const kladdData = {
-  name: "Bobse Bobbsesen",
-  email: "bobbs.thingstad@stud.noroff.no",
-  bio: "Dog, biter, and runner.",
+  name: "Bobbse Bobbsesen",
+  email: "bobbse.thingstad@stud.noroff.no",
+  bio: "Dog, biter, runner.",
   avatar: {
     url: "https://dogtime.com/wp-content/uploads/sites/12/2023/09/GettyImages-1418252093-e1695215819445.jpg?w=1024",
     alt: "Bobse's avatar",
   },
   banner: {
-    url: "https://www.shutterstock.com/image-photo/beautiful-dog-staffordshire-bull-terrier-600nw-1905955297.jpg",
+    url: "https://www.nylabone.com/-/media/project/oneweb/nylabone/images/dog101/breeds-a-z/staffordshire-terrier.jpg",
     alt: "Bobse's banner",
   },
   venueManager: true,
@@ -54,8 +54,6 @@ export function ProfilePage() {
           mb: 3,
         }}
       >
-        {" "}
-        Banner her
         <Box
           sx={{
             display: "flex",
@@ -64,7 +62,10 @@ export function ProfilePage() {
             height: "100%",
           }}
         >
-          {/* Optional overlay or text here */}
+          {/* Optional overlay or text */}
+          <Typography variant="h6" component="h1" sx={{ color: "red" }}>
+            Tekst over banner her
+          </Typography>
         </Box>
       </Paper>
 
@@ -85,6 +86,11 @@ export function ProfilePage() {
           <Typography variant="body2" mt={1}>
             {kladdData.bio}
           </Typography>
+          <Typography variant="body2" mt={1}>
+            {kladdData.venueManager
+              ? "Venue manager 🏠"
+              : "Not a venue manager ⛔️🏠"}
+          </Typography>
         </Box>
       </Box>
 
@@ -98,7 +104,7 @@ export function ProfilePage() {
             onClick={handleCreateVenue}
             sx={{ mb: 2 }}
           >
-            (Fjern?) Create a New Venue
+            (Fjern?) Create a New Venue if Venue manager
           </Button>
         </Grid>
         <Grid item xs={12} md={6}>
@@ -113,8 +119,8 @@ export function ProfilePage() {
         </Grid>
       </Grid>
 
-      {/* Profile Statistics */}
-      <Grid container spacing={2}>
+      {/* Profile Statistics (venues og bookings) */}
+      <Grid container spacing={2} mt={2}>
         <Grid item xs={12} md={6}>
           <Card>
             <CardContent>
@@ -136,9 +142,8 @@ export function ProfilePage() {
       </Grid>
 
       {/* Optional Sections for Venues and Bookings */}
-      {/* This is where you would dynamically list the user's venues and bookings if available */}
-
-      {/* For Venues */}
+      {/* Replace with dynamically list the user's venues and bookings if available */}
+      {/* Venues */}
       {kladdData._count.venues > 0 && (
         <Box mt={4}>
           <Typography variant="h5" component="h2" gutterBottom>
@@ -156,7 +161,7 @@ export function ProfilePage() {
         </Box>
       )}
 
-      {/* For Bookings */}
+      {/* Bookings */}
       {kladdData._count.bookings > 0 && (
         <Box mt={4}>
           <Typography variant="h5" component="h2" gutterBottom>

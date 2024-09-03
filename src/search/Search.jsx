@@ -9,7 +9,11 @@ export function SearchBar() {
       // API search here later?
       options={[]}
       renderInput={(params) => (
-        <TextField {...params} label="Search venues" variant="outlined" />
+        <TextField
+          {...params}
+          label="Search venues by tag(?)"
+          variant="outlined"
+        />
       )}
       sx={{ width: "100%", maxWidth: 400 }} // 100% = shrink on smaller screens
     />
