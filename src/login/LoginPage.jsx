@@ -28,7 +28,9 @@ export function LoginPage() {
         const json = await result.json();
 
         setUser(json.data);
-        navigate("/home");
+        // Bytt senere?
+        alert("Login successful!");
+        navigate("/");
       } else {
         alert("Invalid email or password");
       }

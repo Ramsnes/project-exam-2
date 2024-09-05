@@ -40,7 +40,6 @@ export function RegisterForm({ onSubmit }) {
       delete cleanedData.banner.alt; // Remove alt if only url is provided
     }
 
-    console.log("Data being submitted:", cleanedData);
     onSubmit(cleanedData);
   };
 

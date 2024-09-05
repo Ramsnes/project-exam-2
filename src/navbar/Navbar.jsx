@@ -16,7 +16,25 @@ import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
 import { useAuth } from "../AuthenticationProvider";
 
-const pages = ["Home", "Venues(tom)", "Profile", "Contact"];
+const pages = ["Venues(tom)", "Profile", "Contact"];
+
+function addSettings(user) {
+  let settings = [];
+
+  if (!user) {
+    settings = ["Register", "Login"];
+  }
+
+  if (user) {
+    settings = ["My bookings", "Register", "Logout"];
+  }
+
+  if (user?.venueManager) {
+    settings = ["My venues", "Create venue", ...settings];
+  }
+
+  return settings;
+}
 
 export function Navbar() {
   // useState() for open/close menu
@@ -39,9 +57,7 @@ export function Navbar() {
     setAnchorElUser(null);
   };
 
-  const settings = user
-    ? ["My bookings", "My venues", "Create venue", "Logout", "Register"]
-    : ["Register", "Login"];
+  const settings = addSettings(user);
 
   return (
     <AppBar position="static">
@@ -51,7 +67,7 @@ export function Navbar() {
             variant="h6"
             noWrap
             component="a"
-            href="/home"
+            href="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -114,7 +130,7 @@ export function Navbar() {
             variant="h5"
             noWrap
             component="a"
-            href="/home"
+            href="/"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },

@@ -1,5 +1,5 @@
 // VenueDetails.jsx
-import React from "react";
+import React, { Fragment } from "react";
 import { PlaceholderImg } from "../error/PlaceholderImg";
 import WifiIcon from "@mui/icons-material/Wifi";
 import LocalParkingIcon from "@mui/icons-material/LocalParking";
@@ -11,6 +11,7 @@ import StarIcon from "@mui/icons-material/Star";
 import SignpostIcon from "@mui/icons-material/Signpost";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
 import LanguageIcon from "@mui/icons-material/Language";
+import PublicIcon from "@mui/icons-material/Public";
 import {
   Box,
   Typography,
@@ -22,10 +23,14 @@ import {
   Button,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useAuth, API_KEY } from "../AuthenticationProvider";
+
+const baseUrl = "https://v2.api.noroff.dev";
 
 export function VenueDetails({ venue }) {
   // Navigation hook
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   // If img, get URL. If no img, placeholder
   const imageUrl =
@@ -35,6 +40,27 @@ export function VenueDetails({ venue }) {
 
   // Fn to display boolean as "Yes" or "No"
   const formatBoolean = (value) => (value ? "Yes" : "No");
+  const isOwn = venue.owner.email === user.email;
+
+  const onDelete = async () => {
+    try {
+      const response = await fetch(`${baseUrl}/holidaze/venues/${venue.id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.accessToken}`,
+          "X-Noroff-API-Key": API_KEY,
+        },
+      });
+
+      if (response.ok) {
+        navigate("/");
+        alert("Venue deleted successfuly");
+      } else {
+        alert("An error occurred");
+      }
+    } catch (error) {}
+  };
 
   return (
     // Main container
@@ -129,6 +155,14 @@ export function VenueDetails({ venue }) {
                   </Typography>
                 </Box>
               </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <PublicIcon sx={{ mr: 1 }} />
+                  <Typography variant="body2" gutterBottom>
+                    <strong>Continent:</strong> {venue.location.continent}
+                  </Typography>
+                </Box>
+              </Grid>
             </Grid>
           </Box>
 
@@ -176,14 +210,40 @@ export function VenueDetails({ venue }) {
             </Grid>
           </Box>
 
-          {/* Back button */}
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => navigate("/home")}
+          {/* Buttons */}
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+            }}
           >
-            Back to home
-          </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => navigate("/")}
+            >
+              Back
+            </Button>
+
+            {isOwn && (
+              <Fragment>
+                <Button
+                  variant="contained"
+                  onClick={() => navigate(`/venue/${venue.id}/edit`)}
+                >
+                  Edit
+                </Button>
+                <Button
+                  variant="contained"
+                  color="error"
+                  onClick={() => onDelete()}
+                >
+                  Delete
+                </Button>
+              </Fragment>
+            )}
+          </Box>
           {/* Card content end */}
         </CardContent>
         {/* Main card container end */}

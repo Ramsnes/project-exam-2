@@ -11,17 +11,60 @@ import {
   Grid,
 } from "@mui/material";
 
-export function CreateVenueForm({ onSubmit }) {
+export function VenueForm({ onSubmit, onCancel, submitText, venue }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      name: venue?.name || "",
+      description: venue?.description || "",
+      price: venue?.price || undefined,
+      maxGuests: venue?.maxGuests || undefined,
+      mediaUrl: venue?.media?.[0]?.url || "",
+      mediaAlt: venue?.media?.[0]?.alt || "",
+      address: venue?.location?.address || "",
+      city: venue?.location?.city || "",
+      zip: venue?.location?.zip || "",
+      country: venue?.location?.country || "",
+      continent: venue?.location?.continent || "",
+      lat: venue?.location?.lat || undefined,
+      lng: venue?.location?.lng || undefined,
+      wifi: venue?.meta?.wifi || false,
+      parking: venue?.meta?.parking || false,
+      breakfast: venue?.meta?.breakfast || false,
+      pets: venue?.meta?.pets || false,
+    },
+  });
+
+  console.log(venue);
 
   const handleFormSubmit = (data) => {
     // Clean data
-    const cleanedData = { ...data };
-    console.log("Data being submitted:", cleanedData);
+    const isMedia = !!data.mediaUrl && !!data.mediaAlt;
+    const cleanedData = {
+      name: data.name.trim(),
+      description: data.description.trim(),
+      price: data.price ? +data.price : 0,
+      maxGuests: data.maxGuests ? +data.maxGuests : 0,
+      media: isMedia ? [{ url: data.mediaUrl, alt: data.mediaAlt }] : undefined,
+      location: {
+        address: data.address.trim(),
+        city: data.city.trim(),
+        zip: data.zip.trim(),
+        country: data.country.trim(),
+        continent: data.continent.trim(),
+        lat: data.lat ? +data.lat : 0,
+        lng: data.lng ? +data.lng : 0,
+      },
+      meta: {
+        wifi: !!data.wifi,
+        parking: !!data.parking,
+        breakfast: !!data.breakfast,
+        pets: !!data.pets,
+      },
+    };
     onSubmit(cleanedData);
   };
 
@@ -127,15 +170,15 @@ export function CreateVenueForm({ onSubmit }) {
             <TextField
               fullWidth
               label="Media URL"
-              {...register("media[0].url", {
+              {...register("mediaUrl", {
                 pattern: {
                   value: /^https?:\/\/.+/,
                   message: "Enter a valid URL",
                 },
               })}
               placeholder="https://example.com/image.jpg"
-              error={!!errors.media?.[0]?.url}
-              helperText={errors.media?.[0]?.url?.message}
+              error={!!errors.media?.url}
+              helperText={errors.media?.url?.message}
             />
           </Grid>
 
@@ -144,27 +187,19 @@ export function CreateVenueForm({ onSubmit }) {
             <TextField
               fullWidth
               label="Media URL description"
-              {...register("media[0].alt")}
+              {...register("mediaAlt")}
               placeholder="Image description"
-              error={!!errors.media?.[0]?.alt}
-              helperText={errors.media?.[0]?.alt?.message}
+              error={!!errors.media?.alt}
+              helperText={errors.media?.alt?.message}
             />
           </Grid>
 
           {/* Location Fields */}
           <Grid item xs={12}>
-            {/* <Typography
-              variant="h6"
-              component="h2"
-              gutterBottom
-              sx={{ display: "flex", justifyContent: "start" }}
-            >
-              Location details (optional)
-            </Typography> */}
             <TextField
               fullWidth
               label="Address"
-              {...register("location.address")}
+              {...register("address")}
               placeholder="123 Venue St."
             />
           </Grid>
@@ -172,7 +207,7 @@ export function CreateVenueForm({ onSubmit }) {
             <TextField
               fullWidth
               label="City"
-              {...register("location.city")}
+              {...register("city")}
               placeholder="City"
             />
           </Grid>
@@ -180,7 +215,7 @@ export function CreateVenueForm({ onSubmit }) {
             <TextField
               fullWidth
               label="Zip"
-              {...register("location.zip")}
+              {...register("zip")}
               placeholder="Postal Code"
             />
           </Grid>
@@ -188,7 +223,7 @@ export function CreateVenueForm({ onSubmit }) {
             <TextField
               fullWidth
               label="Country"
-              {...register("location.country")}
+              {...register("country")}
               placeholder="Country"
             />
           </Grid>
@@ -196,7 +231,7 @@ export function CreateVenueForm({ onSubmit }) {
             <TextField
               fullWidth
               label="Continent"
-              {...register("location.continent")}
+              {...register("continent")}
               placeholder="Continent"
             />
           </Grid>
@@ -205,10 +240,20 @@ export function CreateVenueForm({ onSubmit }) {
               fullWidth
               label="Latitude"
               type="number"
-              {...register("location.lat", {
+              {...register("lat", {
                 valueAsNumber: true,
+                min: {
+                  value: -90,
+                  message: "Value cant be less than -90",
+                },
+                max: {
+                  value: 90,
+                  message: "Value cant be more than 90",
+                },
               })}
               placeholder="Latitude"
+              error={!!errors.location?.lat}
+              helperText={errors.location?.lat?.message}
             />
           </Grid>
           <Grid item xs={6}>
@@ -216,29 +261,39 @@ export function CreateVenueForm({ onSubmit }) {
               fullWidth
               label="Longitude"
               type="number"
-              {...register("location.lng", {
+              {...register("lng", {
                 valueAsNumber: true,
+                min: {
+                  value: -180,
+                  message: "Value cant be less than -180",
+                },
+                max: {
+                  value: 180,
+                  message: "Value cant be more than 180",
+                },
               })}
               placeholder="Longitude"
+              error={!!errors.location?.lng}
+              helperText={errors.location?.lng?.message}
             />
           </Grid>
 
           {/* Meta Fields */}
           <Grid item xs={12}>
             <FormControlLabel
-              control={<Checkbox {...register("meta.wifi")} />}
+              control={<Checkbox {...register("wifi")} />}
               label="WiFi"
             />
             <FormControlLabel
-              control={<Checkbox {...register("meta.parking")} />}
+              control={<Checkbox {...register("parking")} />}
               label="Parking"
             />
             <FormControlLabel
-              control={<Checkbox {...register("meta.breakfast")} />}
+              control={<Checkbox {...register("breakfast")} />}
               label="Breakfast"
             />
             <FormControlLabel
-              control={<Checkbox {...register("meta.pets")} />}
+              control={<Checkbox {...register("pets")} />}
               label="Pets allowed"
             />
           </Grid>
@@ -246,7 +301,16 @@ export function CreateVenueForm({ onSubmit }) {
           {/* Submit button */}
           <Grid item xs={12}>
             <Button fullWidth type="submit" variant="contained" color="primary">
-              Create Venue
+              {submitText ?? "Create Venue"}
+            </Button>
+            <Button
+              fullWidth
+              type="butotn"
+              variant="contained"
+              color="secondary"
+              onClick={onCancel}
+            >
+              Cancel
             </Button>
           </Grid>
         </Grid>

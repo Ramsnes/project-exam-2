@@ -1,14 +1,16 @@
 // CreateVenuePage.jsx
 import React, { useState } from "react";
-import { CreateVenueForm } from "./CreateVenueForm";
+import { VenueForm } from "./VenueForm";
 import { useNavigate } from "react-router-dom";
 import { Loader } from "../loader/Loader";
+import { useAuth, API_KEY } from "../AuthenticationProvider";
 
 const baseUrl = "https://v2.api.noroff.dev";
 
-export function CreateVenuePage() {
+export function VenueCreate() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const handleVenueSubmit = async (data) => {
     setLoading(true);
@@ -18,6 +20,8 @@ export function CreateVenuePage() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${user.accessToken}`,
+          "X-Noroff-API-Key": API_KEY,
         },
         body: JSON.stringify(data),
       });
@@ -26,10 +30,9 @@ export function CreateVenuePage() {
         alert("Venue created!");
         // Naviger til nylige opprettet venue her senere
         navigate("/");
+      } else {
+        alert("An error occurred");
       }
-
-      const result = await response.json();
-      console.log("Venue created:", result);
     } catch (error) {
       alert("An error occurred");
     } finally {
@@ -39,7 +42,7 @@ export function CreateVenuePage() {
 
   return (
     <div>
-      <CreateVenueForm onSubmit={handleVenueSubmit} />
+      <VenueForm onSubmit={handleVenueSubmit} onCancel={() => navigate("/")} />
       {loading && <Loader />}
     </div>
   );

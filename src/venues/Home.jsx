@@ -15,8 +15,5 @@ export function Home() {
   if (loading) return <Loader />;
   if (error) return <ErrorMsg />;
 
-  // Render first 6 venues
-  const limitedVenues = venues.slice(0, 6);
-  // Venue list wrapping 6 venues
-  return <VenueList venues={limitedVenues} />;
+  return <VenueList venues={venues} />;
 }

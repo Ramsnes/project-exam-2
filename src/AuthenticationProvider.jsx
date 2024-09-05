@@ -58,3 +58,6 @@ export function useAuth() {
 
   return context;
 }
+
+// API Key
+export const API_KEY = "866105fc-bb1d-4e8d-9e49-081b3c783a70";

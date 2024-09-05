@@ -11,7 +11,6 @@ export function LoginForm({ onSubmit }) {
   } = useForm();
 
   const handleFormSubmit = (data) => {
-    console.log("Login data being submitted", data);
     onSubmit(data);
   };
 

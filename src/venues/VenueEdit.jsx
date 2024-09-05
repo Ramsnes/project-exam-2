@@ -6,9 +6,9 @@ import { useState } from "react";
 import { Loader } from "../loader/Loader";
 import { NoVenuesMsg } from "../error/NoVenuesMsg";
 import { ErrorMsg } from "../error/ErrorMsg";
-import { VenueDetails } from "./VenueDetails";
+import { VenueEditForm } from "./VenueEditForm";
 
-export function Venue() {
+export function VenueEdit() {
   const { id } = useParams(); // Gathers id param
   const [venue, setVenue] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -18,7 +18,7 @@ export function Venue() {
     const fetchVenue = async () => {
       try {
         const response = await fetch(
-          `https://v2.api.noroff.dev/holidaze/venues/${id}?_owner=true`
+          `https://v2.api.noroff.dev/holidaze/venues/${id}`
         );
 
         if (!response.ok) {
@@ -26,7 +26,6 @@ export function Venue() {
         }
         const result = await response.json();
 
-        // .data since since the array starts with array 'data: [rest of array]'
         setVenue(result.data);
       } catch (error) {
         console.error("Fetching error:", error);
@@ -44,5 +43,5 @@ export function Venue() {
   if (error) return <ErrorMsg />;
   if (!venue) return <NoVenuesMsg />;
 
-  return <VenueDetails venue={venue} />;
+  return <VenueEditForm venue={venue} />;
 }
