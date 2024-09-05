@@ -1,7 +1,7 @@
 // Home (landing page).jsx
 import React from "react";
 import { useFetcher } from "../hooks/useFetcher";
-import { VenueList } from "./VenueList";
+import { VenueList } from "./VenuesForm";
 import { Loader } from "../loader/Loader";
 import { ErrorMsg } from "../error/ErrorMsg";
 

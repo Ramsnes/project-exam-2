@@ -55,7 +55,7 @@ export function VenueDetails({ venue }) {
 
       if (response.ok) {
         navigate("/");
-        alert("Venue deleted successfuly");
+        alert("Venue successfully deleted");
       } else {
         alert("An error occurred");
       }
@@ -223,7 +223,7 @@ export function VenueDetails({ venue }) {
               color="primary"
               onClick={() => navigate("/")}
             >
-              Back
+              Back to venues
             </Button>
 
             {isOwn && (

@@ -35,6 +35,19 @@ export function MyVenues() {
 
   return (
     <Container maxWidth="md" sx={{ mt: 4 }}>
+      <Typography
+        variant="h4"
+        component="h1"
+        gutterBottom
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          mt: 4,
+          mb: 4,
+        }}
+      >
+        My venues
+      </Typography>
       <Grid container spacing={3}>
         {myVenues?.map((venue) => {
           // If venue has media, use the first image, otherwise use a placeholder

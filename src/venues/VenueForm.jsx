@@ -298,21 +298,29 @@ export function VenueForm({ onSubmit, onCancel, submitText, venue }) {
             />
           </Grid>
 
-          {/* Submit button */}
-          <Grid item xs={12}>
+          {/* Buttons */}
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+              marginLeft: "15px",
+              marginTop: "15px",
+              maxWidth: "fit-content",
+            }}
+          >
             <Button fullWidth type="submit" variant="contained" color="primary">
-              {submitText ?? "Create Venue"}
+              {submitText ?? "Create venue"}
             </Button>
             <Button
-              fullWidth
-              type="butotn"
+              type="button"
               variant="contained"
-              color="secondary"
+              color="error"
               onClick={onCancel}
             >
               Cancel
             </Button>
-          </Grid>
+          </Box>
         </Grid>
       </form>
     </Box>

@@ -27,7 +27,7 @@ export function VenueList({ venues = [] }) {
   return (
     <Container maxWidth="md" className="container">
       <Typography variant="h4" align="center" gutterBottom>
-        Featured venues
+        Venues
       </Typography>
 
       <div
