@@ -8,6 +8,7 @@ import {
   Grid,
   Typography,
   CardMedia,
+  Button,
 } from "@mui/material";
 import { useFetcher } from "../hooks/useFetcher";
 import { Loader } from "../loader/Loader";
@@ -79,6 +80,14 @@ export function MyVenues() {
           );
         })}
       </Grid>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => navigate("/")}
+        sx={{ marginTop: 2 }}
+      >
+        Back to venues
+      </Button>
     </Container>
   );
 }

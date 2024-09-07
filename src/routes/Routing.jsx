@@ -8,7 +8,7 @@ import { LoginPage } from "../login/LoginPage";
 import { ProfilePage } from "../profile/ProfilePage";
 import { CreateVenuePage } from "../createVenue/CreateVenuePage";
 import { ContactPage } from "../contact/Contact";
-import { BookingsForm } from "../bookings/BookingsForm";
+import { BookingsForm } from "../bookings/MyBookingsForm";
 import { MyVenues } from "../venues/MyVenues";
 import { VenueEdit } from "../venues/VenueEdit";
 import { UpdateProfile } from "../profile/UpdateProfile";

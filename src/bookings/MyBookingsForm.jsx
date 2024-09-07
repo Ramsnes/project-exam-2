@@ -1,6 +1,14 @@
 // MyBookings.jsx
-import { Card, CardContent, Grid, Typography, Container } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  Grid,
+  Typography,
+  Container,
+  Button,
+} from "@mui/material";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const kladdBookings = [
   { id: 1, venue: "Bobse hotel", date: "1234-23-12", guests: 2 },
@@ -8,13 +16,22 @@ const kladdBookings = [
 ];
 
 export function BookingsForm() {
+  const navigate = useNavigate();
+
   return (
     <Container maxWidth="md" sx={{ mt: 4 }}>
-      <Typography variant="h4" component="h1" gutterBottom>
+      <Typography
+        variant="h4"
+        component="h1"
+        gutterBottom
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          mt: 4,
+          mb: 4,
+        }}
+      >
         My bookings
-      </Typography>
-      <Typography variant="body1" gutterBottom>
-        My bookings rendered w/ img etc.
       </Typography>
       <Grid container spacing={3}>
         {kladdBookings.map((booking) => (
@@ -35,6 +52,14 @@ export function BookingsForm() {
           </Grid>
         ))}
       </Grid>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => navigate("/")}
+        sx={{ marginTop: 2 }}
+      >
+        Back to venues
+      </Button>
     </Container>
   );
 }

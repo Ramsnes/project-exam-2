@@ -16,7 +16,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
 import { useAuth } from "../AuthenticationProvider";
 
-const pages = ["Venues(tom)", "Profile", "Contact"];
+const pages = ["Profile", "Contact"];
 
 function addSettings(user) {
   let settings = [];
