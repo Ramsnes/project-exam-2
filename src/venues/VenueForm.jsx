@@ -297,7 +297,6 @@ export function VenueForm({ onSubmit, onCancel, submitText, venue }) {
               label="Pets allowed"
             />
           </Grid>
-
           {/* Buttons */}
           <Box
             sx={{

@@ -27,7 +27,7 @@ export function VenueList({ venues = [] }) {
   return (
     <Container maxWidth="md" className="container">
       <Typography variant="h4" align="center" gutterBottom>
-        Venues
+        Featured venues
       </Typography>
 
       <div
@@ -57,7 +57,7 @@ export function VenueList({ venues = [] }) {
                   height: "100%",
                   display: "flex",
                   flexDirection: "column",
-                  justifyContent: "flex-start",
+                  justifyContent: "center",
                   alignItems: "center",
                 }}
               >
@@ -65,7 +65,7 @@ export function VenueList({ venues = [] }) {
                 <CardActionArea onClick={() => navigate(`/venue/${venue.id}`)}>
                   <CardMedia
                     component="img"
-                    height="200px"
+                    height="140"
                     image={imageUrl}
                     alt={imageAlt || venue.name}
                   />

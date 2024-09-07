@@ -6,7 +6,7 @@ import { Venue } from "../venues/Venue";
 import { RegisterPage } from "../register/RegisterPage";
 import { LoginPage } from "../login/LoginPage";
 import { ProfilePage } from "../profile/ProfilePage";
-import { VenueCreate } from "../venues/VenueCreate";
+import { CreateVenuePage } from "../createVenue/CreateVenuePage";
 import { ContactPage } from "../contact/Contact";
 import { BookingsForm } from "../bookings/BookingsForm";
 import { MyVenues } from "../venues/MyVenues";
@@ -22,7 +22,7 @@ export function Routing() {
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/profile" element={<ProfilePage />} />
-      <Route path="/create-venue" element={<VenueCreate />} />
+      <Route path="/create-venue" element={<CreateVenuePage />} />
       <Route path="/contact" element={<ContactPage />} />
       <Route path="/my-bookings" element={<BookingsForm />} />
       <Route path="/my-venues" element={<MyVenues />} />

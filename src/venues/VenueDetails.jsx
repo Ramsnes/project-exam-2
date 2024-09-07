@@ -12,6 +12,7 @@ import SignpostIcon from "@mui/icons-material/Signpost";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
 import LanguageIcon from "@mui/icons-material/Language";
 import PublicIcon from "@mui/icons-material/Public";
+
 import {
   Box,
   Typography,
@@ -209,7 +210,6 @@ export function VenueDetails({ venue }) {
               </Grid>
             </Grid>
           </Box>
-
           {/* Buttons */}
           <Box
             sx={{

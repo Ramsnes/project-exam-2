@@ -1,13 +1,13 @@
 // CreateVenuePage.jsx
 import React, { useState } from "react";
-import { VenueForm } from "./VenueForm";
+import { VenueForm } from "../venues/VenueForm";
 import { useNavigate } from "react-router-dom";
 import { Loader } from "../loader/Loader";
 import { useAuth, API_KEY } from "../AuthenticationProvider";
 
 const baseUrl = "https://v2.api.noroff.dev";
 
-export function VenueCreate() {
+export function CreateVenuePage() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { user } = useAuth();
