@@ -226,7 +226,7 @@ export function VenueDetails({ venue }) {
               Back to venues
             </Button>
 
-            {isOwn && (
+            {isOwn ? (
               <Fragment>
                 <Button
                   variant="contained"
@@ -242,6 +242,15 @@ export function VenueDetails({ venue }) {
                   Delete
                 </Button>
               </Fragment>
+            ) : (
+              <Button
+                variant="contained"
+                color="success"
+                // riktig?
+                onClick={() => navigate(`/venue/${venue.id}/book`)}
+              >
+                Book venue
+              </Button>
             )}
           </Box>
           {/* Card content end */}

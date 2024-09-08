@@ -1,4 +1,5 @@
-// MyBookings.jsx
+// MyBookingsForm.jsx
+// Add loader
 import {
   Card,
   CardContent,
@@ -12,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 
 const kladdBookings = [
   { id: 1, venue: "Bobse hotel", date: "1234-23-12", guests: 2 },
-  { id: 1, venue: "Morten hotel", date: "5565-56-67", guests: 7 },
+  { id: 2, venue: "Morten hotel", date: "5565-56-67", guests: 7 },
 ];
 
 export function BookingsForm() {
