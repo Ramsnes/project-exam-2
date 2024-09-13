@@ -7,7 +7,13 @@ export function SearchBar() {
       name="search"
       label="Search venues by name"
       variant="outlined"
-      sx={{ width: "100%", maxWidth: 300, minWidth: 200 }}
+      sx={{
+        width: "100%",
+        maxWidth: 300,
+        minWidth: 200,
+        backgroundColor: "white",
+        borderRadius: "10px",
+      }}
     />
   );
 }

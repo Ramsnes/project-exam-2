@@ -59,7 +59,7 @@ export function MyVenues() {
 
           return (
             <Grid item xs={12} md={6} key={venue.id}>
-              <Card>
+              <Card className="hoverCard">
                 <CardActionArea onClick={() => onVenueClick(venue.id)}>
                   <CardMedia
                     component="img"
@@ -68,7 +68,9 @@ export function MyVenues() {
                     alt={imageAlt || venue.name}
                   />
                   <CardContent>
-                    <Typography variant="h6">{venue.name}</Typography>
+                    <Typography gutterBottom variant="h6">
+                      {venue.name}
+                    </Typography>
                     <Typography variant="body1">
                       {venue.location.address}
                     </Typography>
@@ -84,7 +86,13 @@ export function MyVenues() {
         variant="contained"
         color="primary"
         onClick={() => navigate("/")}
-        sx={{ marginTop: 2 }}
+        className="backBtn"
+        sx={{
+          marginTop: 2,
+          "&:hover": {
+            backgroundColor: "#115293",
+          },
+        }}
       >
         Back to venues
       </Button>

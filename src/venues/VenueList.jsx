@@ -26,8 +26,22 @@ export function VenueList({ venues = [] }) {
   // Venue list render
   return (
     <Container maxWidth="md" className="container">
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "300px", // Adjust height as needed
+          backgroundImage: `url('https://zpoton.com/publicdata/productdb/products/1051/images/5913_n.jpg')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center 40%",
+          backgroundRepeat: "no-repeat",
+          zIndex: -1,
+        }}
+      ></div>
       <Typography variant="h4" align="center" gutterBottom>
-        Featured venues
+        _
       </Typography>
 
       <div
@@ -53,6 +67,7 @@ export function VenueList({ venues = [] }) {
           return (
             <Grid item key={venue.id} xs={12} sm={6} md={4}>
               <Card
+                className="hoverCard"
                 sx={{
                   height: "100%",
                   display: "flex",

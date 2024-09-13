@@ -221,6 +221,7 @@ export function VenueDetails({ venue }) {
             <Button
               variant="contained"
               color="primary"
+              className="backBtn"
               onClick={() => navigate("/")}
             >
               Back to venues
@@ -245,7 +246,7 @@ export function VenueDetails({ venue }) {
             ) : (
               <Button
                 variant="contained"
-                color="success"
+                color="primary"
                 // riktig?
                 onClick={() => navigate(`/venue/${venue.id}/book`)}
               >

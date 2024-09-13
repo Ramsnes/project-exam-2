@@ -7,7 +7,9 @@ body {
 }
 
 header {
-  background-color: black !important;
+  /* background-color: #1d1f1e !important; */
+  background-color: #34483e !important;
+  justify-content: center;
 }
 
 .container {
@@ -66,4 +68,21 @@ header {
 /* Loader animation end  */
 /* Errors and loadings end */
 
-/* Forms  */
+/* Cards  */
+.hoverCard {
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.hoverCard:hover {
+  background-color: #f5f3f9 !important;
+  transform: scale(1.01) !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2) !important;
+}
+/* Cards end */
+.backBtn {
+  background-color: #416050 !important;
+}
+
+.backBtn:hover {
+  background-color: #43795d !important;
+}

@@ -60,9 +60,21 @@ export function Navbar() {
   const settings = addSettings(user);
 
   return (
-    <AppBar position="static">
+    <AppBar
+      position="static"
+      sx={{
+        height: "100px",
+      }}
+    >
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
+        <Toolbar
+          disableGutters
+          sx={{
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
           <Typography
             variant="h6"
             noWrap
@@ -76,6 +88,9 @@ export function Navbar() {
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
+              fontSize: "2rem",
+              marginTop: "1",
+              marginBottom: "1",
             }}
           >
             Holidaze
@@ -140,6 +155,9 @@ export function Navbar() {
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
+              fontSize: "2.5rem",
+              marginTop: "1",
+              marginBottom: "1",
             }}
           >
             Holidaze
@@ -166,6 +184,7 @@ export function Navbar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Options menu">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                {/* Avatar img here senere?  */}
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
