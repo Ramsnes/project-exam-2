@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography, Card, CardContent, Grid } from "@mui/material";
+import { Box, Typography, Grid } from "@mui/material";
 import { Helmet } from "react-helmet-async";
 import { useAuth } from "../AuthenticationProvider";
 import { useQuery } from "@tanstack/react-query";
