@@ -14,7 +14,15 @@ export function Bookings({ bookings }) {
   return (
     <Fragment>
       {bookings.length > 0 && (
-        <Box mt={4}>
+        <Box
+          mt={4}
+          sx={{
+            padding: "0 20px 20px",
+            borderRadius: "8px",
+            boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
+            paddingTop: "15px",
+          }}
+        >
           <Typography variant="h5" component="h2" gutterBottom>
             My Bookings
           </Typography>

@@ -29,50 +29,6 @@ const useMyBookings = (name) => {
 const formatDate = (data) =>
   new Intl.DateTimeFormat("nb-NO").format(new Date(data));
 
-/**
- * Struktur på data som returneres fra useMyBookings:
- * 
- *         {
-            "id": "ad4d1d3d-a88f-4f41-bc59-bfabe9651ec3",
-            "dateFrom": "2024-09-10T22:00:00.000Z",
-            "dateTo": "2024-09-10T22:00:00.000Z",
-            "guests": 2,
-            "created": "2024-09-10T18:22:37.357Z",
-            "updated": "2024-09-10T18:22:37.357Z",
-            "venue": {
-                "id": "4b65e60e-adcf-4210-9679-1fa6d8383416",
-                "name": "Villa So",
-                "description": "Nice villa",
-                "media": [
-                    {
-                        "url": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                        "alt": ""
-                    }
-                ],
-                "price": 3453,
-                "maxGuests": 56,
-                "rating": 5,
-                "created": "2024-08-21T09:19:19.981Z",
-                "updated": "2024-08-21T09:19:19.981Z",
-                "meta": {
-                    "wifi": true,
-                    "parking": true,
-                    "breakfast": true,
-                    "pets": true
-                },
-                "location": {
-                    "address": "Villastreet 22",
-                    "city": "Oslo",
-                    "zip": "4545",
-                    "country": "Norway",
-                    "continent": "Europe",
-                    "lat": 0,
-                    "lng": 0
-                }
-            }
-        }
- */
-
 export function MyBookingsPage() {
   const navigate = useNavigate();
   const { user } = useAuth();

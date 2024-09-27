@@ -57,30 +57,6 @@ export function ProfilePage() {
         <ProfileInfo user={user} />
       </Grid>
 
-      {/* Profile Statistics (venues and bookings) */}
-      <Grid container spacing={2} mt={2}>
-        <Grid item xs={12} md={6}>
-          <Card>
-            <CardContent>
-              <Typography variant="h6">Venues</Typography>
-              <Typography variant="body1">
-                {data?.data._count.venues}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Card>
-            <CardContent>
-              <Typography variant="h6">Bookings</Typography>
-              <Typography variant="body1">
-                {data?.data._count.bookings}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
-
       <Venues venues={data?.data.venues ?? []} />
       <Bookings bookings={data?.data.bookings ?? []} />
     </Box>
