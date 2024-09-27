@@ -10,6 +10,7 @@ import {
   Box,
   Grid,
 } from "@mui/material";
+import { Helmet } from "react-helmet-async";
 
 export function RegisterForm({ onSubmit }) {
   // handleSubmit receives the form data if validation is succs.
@@ -46,8 +47,19 @@ export function RegisterForm({ onSubmit }) {
   return (
     <Box
       component="div"
-      sx={{ maxWidth: 500, mx: "auto", mt: 4, mb: 4, padding: "0 20px" }}
+      sx={{
+        maxWidth: 500,
+        mx: "auto",
+        mt: 4,
+        mb: 4,
+        padding: "0 20px 20px",
+        borderRadius: "8px",
+        boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+      }}
     >
+      <Helmet>
+        <title>Register - Holidaze</title>
+      </Helmet>
       <Typography
         variant="h4"
         component="h1"
@@ -57,7 +69,6 @@ export function RegisterForm({ onSubmit }) {
         Register
       </Typography>
       <form onSubmit={handleSubmit(handleFormSubmit)} noValidate>
-        {" "}
         <Grid container spacing={2}>
           {/* Username - required */}
           <Grid item xs={12}>

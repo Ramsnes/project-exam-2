@@ -8,10 +8,14 @@ import {
   LinkedIn,
 } from "@mui/icons-material";
 import { Box, Container, Grid, Typography, Link } from "@mui/material";
+import { Helmet } from "react-helmet-async";
 
 export function ContactPage() {
   return (
     <Container maxWidth="md" className="container">
+      <Helmet>
+        <title>Contact us - Holidaze</title>
+      </Helmet>
       <Typography variant="h4" gutterBottom>
         Contact Us
       </Typography>

@@ -1,70 +1,60 @@
-# Getting Started with Create React App
+# Project exam 2
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
 
-## Available Scripts
+This application is as a web-based product that gives users the ability to become either a customer, or a venue manager(vm). Customers may browse and search for venues and click for more detailed description, then book the respective venue clicked, while vm's may create a venue in which other customers may book. Customers may see which venues(s) they have booked with date-details, while vm's may see which of their venues are booked in date-details. Vm's also has the ability to edit their venue(s) details.
 
-In the project directory, you can run:
+### Features present are:
 
-### `npm start`
+- Noroff Holidaze API
+- Register, login and logout-system
+- Search, view, book, create, and delete venues created
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Build using
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- HTML
+- CSS
+- JavaScript
+- React
+- Material UI
+- dayjs
 
-### `npm test`
+## Frameworks, tools and plugins
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### React
 
-### `npm run build`
+React is a declarative, efficient, and flexible JavaScript library for building user interfaces. It lets you compose complex UIs from small and isolated pieces of code called “components”. We'll get to the funny XML-like tags soon. We use components to tell React what we want to see on the screen.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Material UI
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Material UI (MUI) is a open-source React library that provides pre-built, customizable components based on Google's Material Design. It helps developers create modern, responsive, and visually appealing web applications with ease, offering flexibility through theming and customization while being production-ready out of the box.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### DayJs
 
-### `npm run eject`
+Day.js is a lightweight JavaScript library for parsing, validating, and formatting dates. It provides a simple API similar to Moment.js but with a much smaller size, making it ideal for modern web applications that prioritize performance.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Installation and configuration
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Clone the repository
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+git clone 'repo-link'
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Initialize and activate build from package.JSON
 
-## Learn More
+```
+npm i
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+and
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+npm run build
+```
 
-### Code Splitting
+### For developer review
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+npm run watch
+```

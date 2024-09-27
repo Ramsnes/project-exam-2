@@ -1,5 +1,6 @@
 // AuthenticationProvider.jsx
 import React, { createContext, useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 // Summary:
 // AuthContext: A context for sharing user information.
@@ -29,6 +30,7 @@ export function AuthProvider({ children }) {
   const logOut = () => {
     setUser(null);
     localStorage.removeItem("user");
+    toast.success("Logout successful!");
   };
 
   // This function is used to log in or update the user. It: Updates the user state. Saves the user information in localStorage so it persists even if the page is refreshed.

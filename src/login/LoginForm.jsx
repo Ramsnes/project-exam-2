@@ -2,6 +2,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { TextField, Button, Typography, Box, Grid } from "@mui/material";
+import { Helmet } from "react-helmet-async";
 
 export function LoginForm({ onSubmit }) {
   const {
@@ -21,9 +22,14 @@ export function LoginForm({ onSubmit }) {
         maxWidth: 500,
         mx: "auto",
         mt: 4,
-        padding: "0 20px",
+        padding: "0 20px 20px",
+        borderRadius: "8px",
+        boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
       }}
     >
+      <Helmet>
+        <title>Login - Holidaze</title>
+      </Helmet>
       <Typography
         variant="h4"
         component="h1"

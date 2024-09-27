@@ -7,10 +7,14 @@ body {
 }
 
 header {
-  /* background-color: #1d1f1e !important; */
-  background-color: #34483e !important;
+  background-color: #1c1e1d !important;
+  /* background-color: #34483e !important; */
   justify-content: center;
 }
+/* 
+.searchBar {
+  filter: drop-shadow(0 -2mm 6mm rgb(255, 255, 255));
+} */
 
 .container {
   margin: 2rem 0;
@@ -80,9 +84,9 @@ header {
 }
 /* Cards end */
 .backBtn {
-  background-color: #416050 !important;
+  background-color: #1c1e1d !important;
 }
 
 .backBtn:hover {
-  background-color: #43795d !important;
+  background-color: #2a2c2d !important;
 }

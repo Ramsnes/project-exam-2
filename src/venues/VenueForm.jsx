@@ -1,4 +1,4 @@
-// CreateVenueForm.jsx
+// CreateVenue
 import React from "react";
 import { useForm } from "react-hook-form";
 import {
@@ -10,8 +10,16 @@ import {
   Box,
   Grid,
 } from "@mui/material";
+import { Helmet } from "react-helmet-async";
 
-export function VenueForm({ onSubmit, onCancel, submitText, venue }) {
+export function VenueForm({
+  onSubmit,
+  onCancel,
+  submitText,
+  venue,
+  isLoading,
+  headerText,
+}) {
   const {
     register,
     handleSubmit,
@@ -37,8 +45,6 @@ export function VenueForm({ onSubmit, onCancel, submitText, venue }) {
       pets: venue?.meta?.pets || false,
     },
   });
-
-  console.log(venue);
 
   const handleFormSubmit = (data) => {
     // Clean data
@@ -72,30 +78,34 @@ export function VenueForm({ onSubmit, onCancel, submitText, venue }) {
   return (
     <Box
       component="div"
-      sx={{ maxWidth: 500, mx: "auto", mt: 4, mb: 4, padding: "0 20px" }}
+      sx={{
+        maxWidth: 500,
+        mx: "auto",
+        mt: 4,
+        mb: 4,
+        padding: "0 20px 20px",
+        borderRadius: "8px",
+        boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+      }}
     >
+      <Helmet>
+        <title>Venue form - Holidaze</title>
+      </Helmet>
       <Typography
         variant="h4"
         component="h1"
         gutterBottom
         sx={{ display: "flex", justifyContent: "center", mt: 4, mb: 4 }}
       >
-        Create Venue
+        {headerText}
       </Typography>
 
       <form onSubmit={handleSubmit(handleFormSubmit)} noValidate>
         <Grid container spacing={2}>
           {/* Venue name - required */}
           <Grid item xs={12}>
-            <Typography
-              variant="h6"
-              component="h2"
-              gutterBottom
-              sx={{ display: "flex", justifyContent: "start" }}
-            >
-              Required fields
-            </Typography>
             <TextField
+              required
               fullWidth
               label="Venue name"
               {...register("name", {
@@ -109,6 +119,7 @@ export function VenueForm({ onSubmit, onCancel, submitText, venue }) {
           {/* Description - required */}
           <Grid item xs={12}>
             <TextField
+              required
               fullWidth
               label="Description"
               multiline
@@ -124,6 +135,7 @@ export function VenueForm({ onSubmit, onCancel, submitText, venue }) {
           {/* Price - required */}
           <Grid item xs={12}>
             <TextField
+              required
               fullWidth
               label="Price per night"
               type="number"
@@ -142,6 +154,7 @@ export function VenueForm({ onSubmit, onCancel, submitText, venue }) {
           {/* Max Guests - required */}
           <Grid item xs={12}>
             <TextField
+              required
               fullWidth
               label="Max Guests"
               type="number"
@@ -159,14 +172,6 @@ export function VenueForm({ onSubmit, onCancel, submitText, venue }) {
 
           {/* Media URL - optional */}
           <Grid item xs={12}>
-            <Typography
-              variant="h6"
-              component="h2"
-              gutterBottom
-              sx={{ display: "flex", justifyContent: "start" }}
-            >
-              Optional fields
-            </Typography>
             <TextField
               fullWidth
               label="Media URL"
@@ -235,48 +240,6 @@ export function VenueForm({ onSubmit, onCancel, submitText, venue }) {
               placeholder="Continent"
             />
           </Grid>
-          <Grid item xs={6}>
-            <TextField
-              fullWidth
-              label="Latitude"
-              type="number"
-              {...register("lat", {
-                valueAsNumber: true,
-                min: {
-                  value: -90,
-                  message: "Value cant be less than -90",
-                },
-                max: {
-                  value: 90,
-                  message: "Value cant be more than 90",
-                },
-              })}
-              placeholder="Latitude"
-              error={!!errors.location?.lat}
-              helperText={errors.location?.lat?.message}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              fullWidth
-              label="Longitude"
-              type="number"
-              {...register("lng", {
-                valueAsNumber: true,
-                min: {
-                  value: -180,
-                  message: "Value cant be less than -180",
-                },
-                max: {
-                  value: 180,
-                  message: "Value cant be more than 180",
-                },
-              })}
-              placeholder="Longitude"
-              error={!!errors.location?.lng}
-              helperText={errors.location?.lng?.message}
-            />
-          </Grid>
 
           {/* Meta Fields */}
           <Grid item xs={12}>
@@ -308,10 +271,17 @@ export function VenueForm({ onSubmit, onCancel, submitText, venue }) {
               maxWidth: "fit-content",
             }}
           >
-            <Button fullWidth type="submit" variant="contained" color="primary">
-              {submitText ?? "Create venue"}
+            <Button
+              disabled={isLoading}
+              fullWidth
+              type="submit"
+              variant="contained"
+              color="primary"
+            >
+              {submitText}
             </Button>
             <Button
+              disabled={isLoading}
               type="button"
               variant="contained"
               color="error"

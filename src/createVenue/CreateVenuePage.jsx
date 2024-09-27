@@ -1,49 +1,41 @@
 // CreateVenuePage.jsx
-import React, { useState } from "react";
+import React from "react";
 import { VenueForm } from "../venues/VenueForm";
 import { useNavigate } from "react-router-dom";
-import { Loader } from "../loader/Loader";
-import { useAuth, API_KEY } from "../AuthenticationProvider";
+import { useMutation } from "@tanstack/react-query";
+import { fetchWrapper } from "../fetch-wrapper";
+import toast from "react-hot-toast";
 
-const baseUrl = "https://v2.api.noroff.dev";
+const useCreateVenue = () => {
+  return useMutation({
+    mutationFn: async (data) =>
+      fetchWrapper("holidaze/venues", { method: "POST", body: data }),
+  });
+};
 
 export function CreateVenuePage() {
-  const [loading, setLoading] = useState(false);
+  const { mutate, isPending } = useCreateVenue();
   const navigate = useNavigate();
-  const { user } = useAuth();
 
   const handleVenueSubmit = async (data) => {
-    setLoading(true);
-
-    try {
-      const response = await fetch(`${baseUrl}/holidaze/venues`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.accessToken}`,
-          "X-Noroff-API-Key": API_KEY,
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        alert("Venue created!");
-        // Naviger til nylige opprettet venue her senere
-        navigate("/");
-      } else {
-        alert("An error occurred");
-      }
-    } catch (error) {
-      alert("An error occurred");
-    } finally {
-      setLoading(false);
-    }
+    mutate(data, {
+      onSuccess: (data) => {
+        toast.success("Venue created");
+        navigate(`/venue/${data?.data?.id}`);
+      },
+      onError: () => {
+        toast.error("An error occurred. Could not create venue");
+      },
+    });
   };
 
   return (
-    <div>
-      <VenueForm onSubmit={handleVenueSubmit} onCancel={() => navigate("/")} />
-      {loading && <Loader />}
-    </div>
+    <VenueForm
+      onSubmit={handleVenueSubmit}
+      onCancel={() => navigate("/")}
+      isLoading={isPending}
+      submitText={"Create venue"}
+      headerText={"Create venue"}
+    />
   );
 }

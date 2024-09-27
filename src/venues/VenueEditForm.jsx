@@ -1,53 +1,46 @@
 import { VenueForm } from "./VenueForm";
-import { Loader } from "../loader/Loader";
-import React, { useState } from "react";
-import { useAuth, API_KEY } from "../AuthenticationProvider";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { fetchWrapper } from "../fetch-wrapper";
+import { Helmet } from "react-helmet-async";
+import toast from "react-hot-toast";
 
-const baseUrl = "https://v2.api.noroff.dev";
+const useUpdateVenue = (id) => {
+  return useMutation({
+    mutationFn: async (data) =>
+      fetchWrapper(`holidaze/venues/${id}`, { method: "PUT", body: data }),
+  });
+};
 
 export function VenueEditForm({ venue }) {
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { mutate, isPending } = useUpdateVenue(venue.id);
 
-  const handleVenueUpdate = async (data) => {
-    setLoading(true);
-
-    try {
-      const response = await fetch(`${baseUrl}/holidaze/venues/${venue.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.accessToken}`,
-          "X-Noroff-API-Key": API_KEY,
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        alert("Venue successfully edited!");
-        // Naviger til nylige opprettet venue her senere
-        navigate("/");
-      } else {
-        alert("An error occurred");
-      }
-    } catch (error) {
-      alert("An error occurred");
-    } finally {
-      setLoading(false);
-    }
-  };
+  const handleVenueUpdate = async (data) =>
+    mutate(data, {
+      onSuccess: (data) => {
+        toast.success("Venue successfully edited!");
+        navigate(`/venue/${data?.data?.id}`);
+      },
+      onError: () => {
+        toast.error("An error occurred. Could not update venue");
+      },
+    });
 
   return (
     <div>
+      <Helmet>
+        <title>Edit venue - Holidaze</title>
+      </Helmet>
       <VenueForm
         venue={venue}
         onSubmit={handleVenueUpdate}
         submitText="Update Venue"
         onCancel={() => navigate("/")}
+        isLoading={isPending}
+        headerText="Edit Venue"
       />
-      {loading && <Loader />}
     </div>
   );
 }

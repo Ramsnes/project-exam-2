@@ -1,50 +1,45 @@
 // LoginPage.jsx
-import React, { useState } from "react";
+import React from "react";
 import { LoginForm } from "./LoginForm";
 import { Loader } from "../loader/Loader";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthenticationProvider";
+import { fetchWrapper } from "../fetch-wrapper";
+import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
-const baseUrl = "https://v2.api.noroff.dev";
+const useLogin = () => {
+  return useMutation({
+    mutationFn: async (data) =>
+      fetchWrapper("auth/login?_holidaze=true", {
+        method: "POST",
+        body: data,
+      }),
+  });
+};
 
 export function LoginPage() {
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { setUser } = useAuth();
+  const { mutate, isPending } = useLogin();
 
   const handleLoginSubmit = async (data) => {
-    setLoading(true);
-
-    try {
-      const result = await fetch(`${baseUrl}/auth/login?_holidaze=true`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (result.ok) {
-        const json = await result.json();
-
-        setUser(json.data);
-        // Bytt senere?
-        alert("Login successful!");
+    mutate(data, {
+      onSuccess: (data) => {
+        setUser(data.data);
+        toast.success("Login successfull!");
         navigate("/");
-      } else {
+      },
+      onError: () => {
         alert("Invalid email or password");
-      }
-    } catch (error) {
-      alert("An error ocurred");
-    } finally {
-      setLoading(false);
-    }
+      },
+    });
   };
 
   return (
     <div>
       <LoginForm onSubmit={handleLoginSubmit} />
-      {loading && <Loader />}
+      {isPending && <Loader />}
     </div>
   );
 }

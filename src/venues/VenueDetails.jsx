@@ -12,6 +12,7 @@ import SignpostIcon from "@mui/icons-material/Signpost";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
 import LanguageIcon from "@mui/icons-material/Language";
 import PublicIcon from "@mui/icons-material/Public";
+import toast from "react-hot-toast";
 
 import {
   Box,
@@ -24,14 +25,23 @@ import {
   Button,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useAuth, API_KEY } from "../AuthenticationProvider";
+import { useAuth } from "../AuthenticationProvider";
+import { useMutation } from "@tanstack/react-query";
+import { fetchWrapper } from "../fetch-wrapper";
+import { Helmet } from "react-helmet-async";
 
-const baseUrl = "https://v2.api.noroff.dev";
+const useDeleteVenue = (id) => {
+  return useMutation({
+    mutationFn: async () =>
+      fetchWrapper(`holidaze/venues/${id}`, { method: "DELETE" }),
+  });
+};
 
 export function VenueDetails({ venue }) {
   // Navigation hook
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { mutate } = useDeleteVenue(venue.id);
 
   // If img, get URL. If no img, placeholder
   const imageUrl =
@@ -41,31 +51,25 @@ export function VenueDetails({ venue }) {
 
   // Fn to display boolean as "Yes" or "No"
   const formatBoolean = (value) => (value ? "Yes" : "No");
-  const isOwn = venue.owner.email === user.email;
+  const isOwn = venue.owner?.email === user?.email;
 
-  const onDelete = async () => {
-    try {
-      const response = await fetch(`${baseUrl}/holidaze/venues/${venue.id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.accessToken}`,
-          "X-Noroff-API-Key": API_KEY,
-        },
-      });
-
-      if (response.ok) {
+  const onDelete = async () =>
+    mutate(undefined, {
+      onSuccess: () => {
         navigate("/");
-        alert("Venue successfully deleted");
-      } else {
+        toast.success("Venue deleted!");
+      },
+      onError: () => {
         alert("An error occurred");
-      }
-    } catch (error) {}
-  };
+      },
+    });
 
   return (
     // Main container
     <Container maxWidth="md" className="container">
+      <Helmet>
+        <title>{venue.name} - Holidaze</title>
+      </Helmet>
       {/* Main card container  */}
       <Card variant="outlined">
         {/* Displays image */}
@@ -220,8 +224,8 @@ export function VenueDetails({ venue }) {
           >
             <Button
               variant="contained"
-              color="primary"
               className="backBtn"
+              color="primary"
               onClick={() => navigate("/")}
             >
               Back to venues
@@ -244,14 +248,17 @@ export function VenueDetails({ venue }) {
                 </Button>
               </Fragment>
             ) : (
-              <Button
-                variant="contained"
-                color="primary"
-                // riktig?
-                onClick={() => navigate(`/venue/${venue.id}/book`)}
-              >
-                Book venue
-              </Button>
+              <Fragment>
+                {user && (
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => navigate(`/venue/${venue.id}/booking`)}
+                  >
+                    Book venue
+                  </Button>
+                )}
+              </Fragment>
             )}
           </Box>
           {/* Card content end */}
