@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { Box, Typography, Card, CardContent, CardMedia } from "@mui/material";
+import { Box, Typography, Card, CardContent } from "@mui/material";
 
 export function Venues({ venues }) {
   return (
