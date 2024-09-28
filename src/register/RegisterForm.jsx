@@ -250,8 +250,13 @@ export function RegisterForm({ onSubmit }) {
           <Grid item xs={12}>
             <FormControlLabel
               control={<Checkbox {...register("venueManager")} />}
-              label="Venue manager?"
+              label="Register account as venue manager"
             />
+            <Typography variant="body2">
+              Please check the box above to register as a venue manager, which
+              ables you to rent out venues. Leaving the box unchecked registers
+              the account as a regular customer, able to book venues.
+            </Typography>
           </Grid>
 
           {/* Submit button */}

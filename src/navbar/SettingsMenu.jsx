@@ -48,7 +48,7 @@ export function SettingsMenu() {
 
   return (
     <Box sx={{ flexGrow: 0 }}>
-      <Tooltip title="Options menu">
+      <Tooltip title="User menu">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
           <Avatar
             sx={{ height: "50px", width: "50px" }}
