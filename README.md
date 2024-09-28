@@ -4,6 +4,10 @@
 
 This application is as a web-based product that gives users the ability to become either a customer, or a venue manager(vm). Customers may browse and search for venues and click for more detailed description, then book the respective venue clicked, while vm's may create a venue in which other customers may book. Customers may see which venues(s) they have booked with date-details, while vm's may see which of their venues are booked in date-details. Vm's also has the ability to edit their venue(s) details.
 
+## Netlify deployment
+
+https://holidazemorten.netlify.app/
+
 ### Features present are:
 
 - Noroff Holidaze API

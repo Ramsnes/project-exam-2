@@ -8,8 +8,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthenticationProvider";
-import { fetchWrapper } from "../fetch-wrapper";
-import { useQuery } from "@tanstack/react-query";
+import { useGetUser } from "../use-get-user";
 
 function addSettings(user) {
   let settings = [];
@@ -29,17 +28,9 @@ function addSettings(user) {
   return settings;
 }
 
-const useGetUser = (name) => {
-  return useQuery({
-    queryKey: ["user", name],
-    queryFn: async () => fetchWrapper(`holidaze/profiles/${name}`),
-    enabled: !!name,
-  });
-};
-
 export function SettingsMenu() {
   const { user, logOut } = useAuth();
-  const { data } = useGetUser(user?.name);
+  const { data } = useGetUser();
   const navigate = useNavigate();
 
   const [anchorElUser, setAnchorElUser] = React.useState(null);

@@ -1,26 +1,12 @@
 import React from "react";
 import { Box, Typography, Grid } from "@mui/material";
 import { Helmet } from "react-helmet-async";
-import { useAuth } from "../AuthenticationProvider";
-import { useQuery } from "@tanstack/react-query";
-import { fetchWrapper } from "../fetch-wrapper";
+import { useGetUser } from "../use-get-user";
 import { AvatarSection } from "./AvatarSection";
 import { ProfileInfo } from "./ProfileInfo";
 import { Bookings } from "./Bookings";
 import { Venues } from "./Venues";
 import { Banner } from "./Banner";
-
-const useGetUser = () => {
-  const { user } = useAuth();
-  const name = user?.name;
-
-  return useQuery({
-    queryKey: ["user", name],
-    queryFn: async () =>
-      fetchWrapper(`holidaze/profiles/${name}?_bookings=true&_venues=true`),
-    enabled: !!name,
-  });
-};
 
 export function ProfilePage() {
   const { data, isError } = useGetUser();
