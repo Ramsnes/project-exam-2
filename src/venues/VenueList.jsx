@@ -55,7 +55,7 @@ export function VenueList({ venues = [], isLoading, isError }) {
           mb: 4,
         }}
       >
-        Latest venues
+        Holidaze venues
       </Typography>
       <Component isLoading={isLoading} isError={isError} venues={venues} />
     </Container>
