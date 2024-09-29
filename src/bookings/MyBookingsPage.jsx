@@ -88,9 +88,7 @@ export function MyBookingsPage() {
                         alt={imageAlt}
                         sx={{ marginBottom: 2 }}
                       />
-                      <Typography variant="h6">
-                        Venue name: {booking.venue.name}
-                      </Typography>
+                      <Typography variant="h6">{booking.venue.name}</Typography>
 
                       <Typography variant="body1" sx={{ marginTop: 2 }}>
                         Date of your checkin: {formatDate(booking.dateFrom)}
