@@ -1,13 +1,12 @@
 // VenueList.jsx
 import React from "react";
-import { Container, Grid } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 import { SearchBar } from "../search/Search";
 import { Loader } from "../loader/Loader";
 import { ErrorMsg } from "../error/ErrorMsg";
 import { VenueListItem } from "./VenueListItem";
 import { Banner } from "./Banner";
 
-// TODO: Kanskje kall noe annet men jeg vet ikke hva
 const Component = ({ isLoading, isError, venues }) => {
   if (isLoading) {
     return <Loader />;
@@ -45,7 +44,19 @@ export function VenueList({ venues = [], isLoading, isError }) {
     >
       <Banner />
       <SearchBar />
-
+      <Typography
+        variant="h4"
+        component="h1"
+        gutterBottom
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          mt: 10,
+          mb: 4,
+        }}
+      >
+        Latest venues
+      </Typography>
       <Component isLoading={isLoading} isError={isError} venues={venues} />
     </Container>
   );

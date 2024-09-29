@@ -27,6 +27,7 @@ export function VenueListItem({ venue }) {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
+          maxHeight: "250px",
         }}
       >
         <CardActionArea onClick={() => navigate(`/venue/${venue.id}`)}>

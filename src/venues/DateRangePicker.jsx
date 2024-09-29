@@ -66,11 +66,10 @@ export const DateRangePicker = ({ control, bookedDates }) => {
               localeText={{ start: "Check-in", end: "Check-out" }}
               value={[from, to]}
               onChange={(e) => {
-                const first = e?.[0]?.toISOString();
-                const second = e?.[1]?.toISOString();
+                const dateFrom = e?.[0]?.toISOString();
+                const dateTo = e?.[1]?.toISOString();
 
-                console.log(first, second);
-                onChange({ dateFrom: first, dateTo: second });
+                onChange({ dateFrom, dateTo });
               }}
               {...rest}
               slotProps={{

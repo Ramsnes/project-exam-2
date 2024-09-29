@@ -100,62 +100,64 @@ export function BookingForm({ bookedDates, maxGuests }) {
             mx: { xs: 2, sm: 4, md: 6 },
           }}
         >
-          Please select your check-in and check-out dates from the calendar,
-          ensuring that the dates are available. After selecting your dates,
-          enter the number of guests staying at the venue (please refere to the
-          respective venue's max guests limit). Once you're ready, click "Book"
-          to confirm your reservation.
+          Select your check-in and check-out dates from the calendar, followed
+          by the number of guests that will partake in the booking.
         </Typography>
 
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* Main grid  */}
-          <Grid container spacing={3} direction={"column"}>
+          <Grid
+            container
+            spacing={3}
+            direction={"column"}
+            sx={{ alignItems: "center" }}
+          >
+            {/* DateRangePicker and Guests field */}
             <Grid
               item
               xs={12}
               md={8}
               lg={4}
-              sx={{ maxWidth: 300, mx: { xs: 2, sm: 4, md: 6 } }}
+              sx={{ maxWidth: 300, width: "100%" }}
             >
-              <DateRangePicker control={control} bookedDates={bookedDates} />
-            </Grid>
+              {/* Check-in/Check-out Date Picker */}
+              <Grid item xs={12} sx={{ mb: 3, width: "100%" }}>
+                <DateRangePicker control={control} bookedDates={bookedDates} />
+              </Grid>
 
-            <Grid
-              item
-              xs={12}
-              md={6}
-              lg={4}
-              sx={{ display: "flex", justifyContent: "center" }}
-            >
-              <TextField
-                {...register("guests", {
-                  validate: {
-                    required: (value) => !!value || "This field is required",
-                    invalid: (value) => {
-                      if (maxGuests != null && value > maxGuests) {
-                        return `The number of guests exceeds the maximum limit of ${maxGuests}`;
-                      }
-
-                      return true;
+              {/* Guests Field */}
+              <Grid item xs={12} sx={{ width: "45%" }}>
+                <TextField
+                  {...register("guests", {
+                    validate: {
+                      required: (value) => !!value || "This field is required",
+                      invalid: (value) => {
+                        if (maxGuests != null && value > maxGuests) {
+                          return `The number of guests exceeds the maximum limit of ${maxGuests}`;
+                        }
+                        return true;
+                      },
                     },
-                  },
-                })}
-                fullWidth
-                label="Guests"
-                type="number"
-                error={!!errors.guests}
-                helperText={errors.guests?.message}
-                sx={{ width: "100%", maxWidth: 300 }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <PeopleAltIcon sx={{ color: "gray", fontSize: "20px" }} />
-                    </InputAdornment>
-                  ),
-                }}
-              />
+                  })}
+                  fullWidth
+                  label="Guests"
+                  type="number"
+                  error={!!errors.guests}
+                  helperText={errors.guests?.message}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <PeopleAltIcon
+                          sx={{ color: "gray", fontSize: "20px" }}
+                        />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </Grid>
             </Grid>
 
+            {/* Buttons */}
             <Grid
               item
               xs={12}

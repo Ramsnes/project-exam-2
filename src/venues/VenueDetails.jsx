@@ -220,6 +220,7 @@ export function VenueDetails({ venue }) {
               display: "flex",
               alignItems: "center",
               gap: 1,
+              flexWrap: "wrap",
             }}
           >
             <Button

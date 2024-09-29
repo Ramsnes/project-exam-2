@@ -35,7 +35,7 @@ export function Booking() {
   }
 
   const bookedDates = getBookedDates(data.data.bookings ?? []);
-  console.log(bookedDates);
+
   return (
     <BookingForm bookedDates={bookedDates} maxGuests={data?.data?.maxGuests} />
   );
