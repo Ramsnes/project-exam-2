@@ -1,5 +1,3 @@
-import toast from "react-hot-toast";
-
 const localStorageKey = "user";
 
 const API_URL = "https://v2.api.noroff.dev";
