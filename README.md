@@ -60,5 +60,5 @@ npm run build
 ### For developer review
 
 ```
-npm run watch
+npm run start
 ```
