@@ -41,7 +41,9 @@ export function RegisterForm({ onSubmit }) {
       delete cleanedData.banner.alt; // Remove alt if only url is provided
     }
 
-    onSubmit(cleanedData);
+    delete cleanedData.confirmPassword; // Remove confirmPassword field
+
+    onSubmit({ ...cleanedData, email: cleanedData.email.toLowerCase() });
   };
 
   return (
@@ -129,6 +131,7 @@ export function RegisterForm({ onSubmit }) {
               label="Password"
               type="password"
               {...register("password", {
+                deps: ["confirmPassword"],
                 validate: {
                   valid: (value) => {
                     if (!value) {
@@ -146,6 +149,32 @@ export function RegisterForm({ onSubmit }) {
               })}
               error={!!errors.password}
               helperText={errors.password?.message}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              required
+              fullWidth
+              label="Confirm password"
+              type="password"
+              {...register("confirmPassword", {
+                deps: ["password"],
+                validate: {
+                  valid: (value, values) => {
+                    if (!values.password) {
+                      return true;
+                    }
+
+                    if (value !== values.password) {
+                      return "Passwords do not match. Please try again.";
+                    }
+
+                    return true;
+                  },
+                },
+              })}
+              error={!!errors.confirmPassword}
+              helperText={errors.confirmPassword?.message}
             />
           </Grid>
 

@@ -1,3 +1,5 @@
+import toast from "react-hot-toast";
+
 const localStorageKey = "user";
 
 const API_URL = "https://v2.api.noroff.dev";
@@ -30,6 +32,13 @@ export function fetchWrapper(endpoint, { body, ...customConfig } = {}) {
   }
 
   return fetch(`${API_URL}/${endpoint}`, config).then(async (response) => {
+    if (response.status === 401) {
+      window.location.href = "/login";
+      localStorage.removeItem("user");
+      alert("Unauthorized. Please log in again");
+      return;
+    }
+
     if (response.ok) {
       if (response.status === 204) {
         return;

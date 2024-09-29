@@ -1,43 +1,39 @@
 // RegisterPage.jsx
-import React, { useState } from "react";
+import React from "react";
 import { RegisterForm } from "./RegisterForm";
 import { Loader } from "../loader/Loader";
 import { useNavigate } from "react-router-dom";
-
-const baseUrl = "https://v2.api.noroff.dev";
+import { useMutation } from "@tanstack/react-query";
+import { fetchWrapper } from "../fetch-wrapper";
+import toast from "react-hot-toast";
 
 export function RegisterPage() {
-  const [loading, setLoading] = useState(false);
+  const { mutate, isPending } = useMutation({
+    mutationFn: (data) =>
+      fetchWrapper("auth/register", { method: "POST", body: data }),
+  });
   const navigate = useNavigate();
 
   const handleRegisterSubmit = async (data) => {
-    setLoading(true);
-
-    try {
-      const result = await fetch(`${baseUrl}/auth/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (result.ok) {
+    mutate(data, {
+      onSuccess: () => {
         navigate("/login");
-      } else {
-        alert("An error occurred");
-      }
-    } catch (error) {
-      alert("An error occurred");
-    } finally {
-      setLoading(false);
-    }
+      },
+      onError: (error) => {
+        const profileExists = error?.message.includes("Profile already exists");
+        toast.error(
+          `Registration failed. ${
+            profileExists ? "Profile already exists" : "Please try again"
+          }`
+        );
+      },
+    });
   };
 
   return (
     <div>
       <RegisterForm onSubmit={handleRegisterSubmit} />
-      {loading && <Loader />}
+      {isPending && <Loader />}
     </div>
   );
 }

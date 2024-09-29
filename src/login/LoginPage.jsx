@@ -24,16 +24,19 @@ export function LoginPage() {
   const { mutate, isPending } = useLogin();
 
   const handleLoginSubmit = async (data) => {
-    mutate(data, {
-      onSuccess: (data) => {
-        setUser(data.data);
-        toast.success("Login successfull!");
-        navigate("/");
-      },
-      onError: () => {
-        alert("Invalid email or password");
-      },
-    });
+    mutate(
+      { ...data, email: data.email.toLowerCase() },
+      {
+        onSuccess: (data) => {
+          setUser(data.data);
+          toast.success("Login successfull!");
+          navigate("/");
+        },
+        onError: () => {
+          alert("Invalid email or password");
+        },
+      }
+    );
   };
 
   return (
